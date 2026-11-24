@@ -38,7 +38,11 @@ export default function Header() {
         </nav>
 
         <Link className="btn primary sm" href="#roles">
-          View openings <span className="arr" aria-hidden="true">→</span>
+          <span className="btn-label">
+            <span className="btn-text">View openings</span>
+            <span className="btn-underline" aria-hidden="true" />
+          </span>
+          <span className="arr" aria-hidden="true">→</span>
         </Link>
       </div>
     </header>

@@ -190,6 +190,76 @@ mark::after {
 .btn.primary {
   background: var(--ink);
   color: var(--bg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1),
+              box-shadow 0.25s cubic-bezier(0.34, 1.4, 0.64, 1),
+              background 0.2s, color 0.2s;
+  overflow: visible;
+  position: relative;
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(5, 6, 8, 0.22);
+}
+
+.btn.primary:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 4px 12px rgba(5, 6, 8, 0.16);
+}
+
+.btn-label {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.btn-text {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-underline {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.btn-underline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.22s ease-out;
+}
+
+.btn.primary:hover .btn-underline::before {
+  transform-origin: left;
+  animation: streakUnderline 0.45s 0.12s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes streakUnderline {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.4;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
 }
 
 .btn.accent {
@@ -215,25 +285,40 @@ mark::after {
 }
 
 .btn .arr {
-  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), color 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.25s ease;
   display: inline-block;
-  will-change: transform, color;
-}
-
-.btn:hover .arr {
-  transform: translate(30px, -14px) rotate(-18deg);
+  will-change: transform, opacity;
 }
 
 .btn.primary:hover .arr {
-  color: var(--ink);
+  animation: arrowRocketLaunch 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes arrowRocketLaunch {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  35% {
+    transform: translate(16px, -4px) scale(1.1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: translate(32px, -8px) scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(40px, -10px) scale(0.4);
+    opacity: 0;
+  }
 }
 
 .btn.accent:hover .arr {
-  color: var(--ink);
+  transform: translate(6px, 0);
 }
 
-.btn.sm:hover .arr {
-  transform: translate(24px, -11px) rotate(-18deg);
+.btn.ghost:hover .arr {
+  transform: translate(4px, 0);
 }
 
 .link {
