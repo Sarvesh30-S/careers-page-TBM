@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { Role, FormField } from "@/types";
 import { FIELDS, STEPS, ROLES, DEPTS } from "@/data/data";
 
@@ -44,6 +45,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   onClose,
   onToast,
 }) => {
+  const [mounted, setMounted] = useState<boolean>(false);
   const [step, setStep] = useState<number>(0);
   const [values, setValues] = useState<Record<string, any>>({});
   const [file, setFile] = useState<File | null>(null);
@@ -52,6 +54,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const [referenceId, setReferenceId] = useState<string>("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const sheetRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -794,7 +800,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
   const firstName = String(values.name || "").trim().split(" ")[0] || "there";
   const appliedRoleObj = ROLES.find((r) => r.id === values.role) || selectedRole;
 
-  return (
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
     <>
       {/* Modal Container */}
       <div
@@ -944,7 +952,8 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           )}
         </div>
       </div>
-    </>
+    </>,
+    document.body
   );
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Role } from "@/types";
 
 interface RoleDetailDrawerProps {
@@ -20,8 +21,13 @@ export const RoleDetailDrawer: React.FC<RoleDetailDrawerProps> = ({
   onClose,
   onApply,
 }) => {
+  const [mounted, setMounted] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const lastActiveElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Focus management and body scroll locking
   useEffect(() => {
@@ -52,9 +58,9 @@ export const RoleDetailDrawer: React.FC<RoleDetailDrawerProps> = ({
     }
   }, [isOpen, onClose]);
 
-  if (!role) return null;
+  if (!role || !mounted) return null;
 
-  return (
+  return createPortal(
     <>
       {/* Background Overlay / Scrim */}
       <div
@@ -137,7 +143,8 @@ export const RoleDetailDrawer: React.FC<RoleDetailDrawerProps> = ({
           </button>
         </div>
       </aside>
-    </>
+    </>,
+    document.body
   );
 };
 

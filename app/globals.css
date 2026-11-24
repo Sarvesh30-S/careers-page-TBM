@@ -733,10 +733,9 @@ mark.draw.active::after {
 #site.page-typing main > :not(.hero),
 #site.page-typing footer {
   opacity: 0;
-  transform: translateY(24px);
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition: opacity 0.8s var(--ease);
 }
 
 /* Once typing completes, all elements enter with choreographed animations */
@@ -763,10 +762,9 @@ mark.draw.active::after {
 #site.page-ready main > :not(.hero),
 #site.page-ready footer {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
   visibility: visible;
-  transition: opacity 0.8s 0.22s var(--ease), transform 0.8s 0.22s var(--ease);
+  transition: opacity 0.8s 0.22s var(--ease);
 }
 
 @media (prefers-reduced-motion: reduce) {
