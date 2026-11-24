@@ -22,7 +22,12 @@ export const metadata: Metadata = {
   description:
     "Curiosity gets you in. Courage gets you heard. Careers at TheBoredMonkey, Lower Parel, Mumbai.",
   icons: {
-    icon: "/assets/logo-light.png",
+    icon: [
+      { url: "/theboredmonkey-tbm-badge.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/theboredmonkey-tbm-badge.png",
+    apple: "/theboredmonkey-tbm-badge.png",
   },
 };
 
