@@ -148,10 +148,7 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
 
         <div className="ctas">
           <Link className="btn primary" href="#roles">
-            <span className="btn-label">
-              <span className="btn-text">View openings</span>
-              <span className="btn-underline" aria-hidden="true" />
-            </span>
+            <span className="btn-text">View openings</span>
             <span className="arr" aria-hidden="true">→</span>
           </Link>
           <Link className="btn ghost" href="#life">
