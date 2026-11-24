@@ -34,9 +34,6 @@ export default function Header() {
             <li>
               <Link href="#hiring">How we hire</Link>
             </li>
-            <li>
-              <Link href="#roles">Open roles</Link>
-            </li>
           </ul>
         </nav>
 
