@@ -2116,7 +2116,7 @@ body.dash #dash {
 
 .kpis {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--line);
 }
@@ -2146,13 +2146,14 @@ body.dash #dash {
 
 @media (max-width: 720px) {
   .kpis {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
-  .kpi:nth-child(3) {
+  .kpi {
+    padding: 16px 0;
+  }
+  .kpi + .kpi {
     padding-left: 0;
     border-left: 0;
-  }
-  .kpi:nth-child(n + 3) {
     border-top: 1px solid var(--line);
   }
 }

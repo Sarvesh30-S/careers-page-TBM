@@ -100,12 +100,8 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
         {scopedApps.length} applicants in the system.
       </p>
 
-      {/* 4 KPIs */}
+      {/* 3 KPIs */}
       <div className="kpis">
-        <div className="kpi">
-          <b>{openRolesCount}</b>
-          <span>Open roles</span>
-        </div>
         <div className="kpi">
           <b>{newLastWeek}</b>
           <span>New applicants, last 7 days</span>
