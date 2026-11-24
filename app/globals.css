@@ -597,6 +597,13 @@ input:focus, select:focus, textarea:focus {
   display: block;
   max-width: 100%;
   min-height: 1.05em;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .kin .ln {
+    white-space: normal;
+  }
 }
 
 /* Typing Caret */
@@ -616,6 +623,162 @@ input:focus, select:focus, textarea:focus {
     opacity: 1;
   }
   50% {
+    opacity: 0;
+  }
+}
+
+.type-cursor.solid {
+  animation: none;
+  opacity: 1;
+}
+
+/* Enter Keycap indicator & press animation */
+.enter-keycap {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  padding: 3px 10px 4px 8px;
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: #f3f3f3;
+  background: linear-gradient(180deg, #2c2c31 0%, #1a1a1e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+  vertical-align: 0.12em;
+  user-select: none;
+  pointer-events: none;
+  animation: enterKeyPop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.22s ease;
+}
+
+@keyframes enterKeyPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.enter-keycap .enter-icon {
+  font-size: 1.15em;
+  line-height: 1;
+  color: var(--accent);
+  font-weight: 700;
+  transition: color 0.12s ease, transform 0.15s ease;
+}
+
+.enter-keycap .enter-label {
+  font-size: 0.82em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.92;
+}
+
+/* Simulated physical keystroke down */
+.enter-keycap.pressing {
+  transform: translateY(3px) scale(0.95);
+  background: linear-gradient(180deg, #ff6b35 0%, #e8501a 100%);
+  border-color: #ff7d47;
+  border-bottom: 1px solid #c23807;
+  box-shadow: 0 0 20px rgba(255, 90, 31, 0.7), 0 1px 3px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+.enter-keycap.pressing .enter-icon {
+  color: #ffffff;
+  transform: translateX(1px);
+}
+
+/* Key sent / upload launch state */
+.enter-keycap.sent {
+  animation: enterKeySent 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+  pointer-events: none;
+}
+
+@keyframes enterKeySent {
+  0% {
+    opacity: 1;
+    transform: translateY(2px) scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.85);
+  }
+}
+
+@media (max-width: 600px) {
+  .enter-keycap {
+    margin-left: 6px;
+    padding: 2px 7px 3px 6px;
+    font-size: 11px;
+    gap: 4px;
+    border-radius: 5px;
+  }
+}
+
+/* Slogan commit & upload effect */
+.kin.slogan-sent {
+  animation: sloganCommit 0.48s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  position: relative;
+}
+
+@keyframes sloganCommit {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 0 16px rgba(255, 90, 31, 0.25));
+  }
+  65% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(0);
+    filter: none;
+  }
+}
+
+/* Luminous transmission/upload wave across the letters */
+.kin.slogan-sent::after {
+  content: "";
+  position: absolute;
+  inset: -6px -12px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 90, 31, 0) 15%,
+    rgba(255, 90, 31, 0.3) 42%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 90, 31, 0.3) 58%,
+    rgba(255, 90, 31, 0) 85%,
+    transparent 100%
+  );
+  clip-path: inset(0 round 6px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: uploadBeam 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes uploadBeam {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
     opacity: 0;
   }
 }
@@ -702,7 +865,7 @@ mark.draw.active::after {
 }
 
 .hero h1.kin {
-  max-width: 100%;
+  max-width: none !important;
 }
 
 /* While slogan is typing, the entire page is empty */
@@ -783,7 +946,14 @@ mark.draw.active::after {
     transform: scaleX(1) !important;
     transition: none !important;
   }
-  .type-cursor {
+  .type-cursor,
+  .enter-keycap {
+    display: none !important;
+  }
+  .kin.slogan-sent {
+    animation: none !important;
+  }
+  .kin.slogan-sent::after {
     display: none !important;
   }
   .scroll-cue i::after {

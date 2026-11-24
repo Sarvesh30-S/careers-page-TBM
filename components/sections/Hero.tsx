@@ -23,7 +23,15 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
   const [showOops, setShowOops] = useState(false);
   const [isOopsFading, setIsOopsFading] = useState(false);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [enterState, setEnterState] = useState<"idle" | "visible" | "pressing" | "sent">("idle");
+  const [isSloganSent, setIsSloganSent] = useState(false);
   const hasFinishedRef = useRef(false);
+  const enterStateRef = useRef<"idle" | "visible" | "pressing" | "sent">("idle");
+
+  const updateEnterState = (state: "idle" | "visible" | "pressing" | "sent") => {
+    enterStateRef.current = state;
+    setEnterState(state);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -60,16 +68,29 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
       setLine2(LINE2_FINAL);
       setIsLine1Done(true);
       setShowOops(false);
+      updateEnterState("idle");
+      setIsSloganSent(true);
       setIsTypingComplete(true);
       onTypingComplete?.();
     };
 
-    // Allow user to click anywhere or press any key to skip typing
-    const handleSkip = () => {
+    // Allow user to click anywhere or press key to interact/skip
+    const handleClick = () => {
       finishTyping();
     };
-    window.addEventListener("click", handleSkip, { once: true });
-    window.addEventListener("keydown", handleSkip, { once: true });
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (hasFinishedRef.current) return;
+      if (e.key === "Enter" && enterStateRef.current === "visible") {
+        clearTimeout(timer);
+        stepPressEnter();
+        return;
+      }
+      finishTyping();
+    };
+
+    window.addEventListener("click", handleClick, { once: true });
+    window.addEventListener("keydown", handleKeyDown);
 
     // Step 1: Type "Curiosity gets you in."
     function stepLine1() {
@@ -136,13 +157,41 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
         const delay = 36 + Math.floor(Math.random() * 10);
         timer = setTimeout(stepTypeCorrect, delay);
       } else {
-        // Step 8: Typing complete! Leave final correct slogan and reveal page
-        setIsTypingComplete(true);
-        hasFinishedRef.current = true;
-        timer = setTimeout(() => {
-          onTypingComplete?.();
-        }, 140);
+        // Step 8: Slogan completely written! Display the Enter key prompt
+        updateEnterState("visible");
+        // Pause briefly (340ms) with the Enter keycap visible
+        timer = setTimeout(stepPressEnter, 340);
       }
+    }
+
+    // Step 9: Simulate pressing the Enter key (tactile keypress down)
+    function stepPressEnter() {
+      if (hasFinishedRef.current) return;
+      updateEnterState("pressing");
+      // Key stays pressed down for 220ms
+      timer = setTimeout(stepSendSlogan, 220);
+    }
+
+    // Step 10: Slogan gets sent / uploaded in place!
+    function stepSendSlogan() {
+      if (hasFinishedRef.current) return;
+      updateEnterState("sent");
+      setIsSloganSent(true);
+
+      // Slogan executes commit bump & upload shimmer sweep
+      // Step 11: After upload beam passes (340ms), remove enter keycap and draw orange marker
+      timer = setTimeout(() => {
+        if (hasFinishedRef.current) return;
+        updateEnterState("idle");
+        setIsTypingComplete(true);
+
+        // Step 12: Reveal the rest of the page (nav, lede, buttons, sections)
+        timer = setTimeout(() => {
+          if (hasFinishedRef.current) return;
+          hasFinishedRef.current = true;
+          onTypingComplete?.();
+        }, 260);
+      }, 340);
     }
 
     // Start typing after initial mount delay
@@ -150,8 +199,8 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("click", handleSkip);
-      window.removeEventListener("keydown", handleSkip);
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onTypingComplete]);
 
@@ -162,7 +211,10 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
 
   return (
     <section className="hero wrap" id="top">
-      <h1 className="kin" aria-label="Curiosity gets you in. Courage gets you heard.">
+      <h1
+        className={`kin ${isSloganSent ? "slogan-sent" : ""}`}
+        aria-label="Curiosity gets you in. Courage gets you heard."
+      >
         <span className="ln">
           {displayLine1}
           {mounted && !isLine1Done && (
@@ -182,8 +234,22 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
               {displayLine2.slice(7)}
             </>
           )}
-          {mounted && isLine1Done && !isComplete && (
-            <span className="type-cursor" aria-hidden="true" />
+          {mounted && isLine1Done && !isSloganSent && (
+            <span
+              className={`type-cursor ${enterState !== "idle" ? "solid" : ""}`}
+              aria-hidden="true"
+            />
+          )}
+          {mounted && enterState !== "idle" && (
+            <span
+              className={`enter-keycap ${enterState}`}
+              aria-hidden="true"
+            >
+              <span className="enter-icon">↵</span>
+              <span className="enter-label">
+                {enterState === "sent" ? "Sent" : "Enter"}
+              </span>
+            </span>
           )}
           <span className="oops-anchor">
             {showOops && (
