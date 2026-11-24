@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState, useCallback } from "react";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
 import CulturePhoto from "@/components/sections/CulturePhoto";
@@ -11,6 +14,12 @@ import Footer from "@/components/layout/Footer";
 import DashboardContainer from "@/components/dashboard/DashboardContainer";
 
 export default function CareersPage() {
+  const [isReady, setIsReady] = useState(false);
+
+  const handleTypingComplete = useCallback(() => {
+    setIsReady(true);
+  }, []);
+
   return (
     <>
       <a className="sr" href="#main">
@@ -18,10 +27,10 @@ export default function CareersPage() {
       </a>
 
       {/* Main Public Site Wrapper */}
-      <div id="site">
+      <div id="site" className={isReady ? "page-ready" : "page-typing"}>
         <Header />
         <main id="main">
-          <Hero />
+          <Hero isReady={isReady} onTypingComplete={handleTypingComplete} />
           <CulturePhoto />
           <WhyLadder />
           <SecondOrderThinking />
