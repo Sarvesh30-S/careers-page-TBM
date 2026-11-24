@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Applicant, Role, ApplicationStage } from "@/types";
 import { STAGES } from "@/data/data";
-import { fitOf, summaryOf, emailOf } from "@/lib/dashboard";
+import { fitOf, summaryOf, emailOf, formatMonthly } from "@/lib/dashboard";
 
 interface ApplicantDrawerProps {
   applicant: Applicant | null;
@@ -123,10 +123,12 @@ export const ApplicantDrawer: React.FC<ApplicantDrawerProps> = ({
           [
             "Pay",
             applicant.ctc
-              ? `₹${applicant.ctc} L now → ₹${applicant.ectc} L expected${
+              ? `${formatMonthly(applicant.ctc)} now → ${formatMonthly(
+                  applicant.ectc
+                )} expected${
                   applicant.negotiable === "Yes" ? ", negotiable" : ""
                 }`
-              : `₹${applicant.ectc} L expected`,
+              : `${formatMonthly(applicant.ectc)} expected`,
           ] as [string, string],
         ]),
     ["Languages", (applicant.langs || []).join(", ") || "—"],

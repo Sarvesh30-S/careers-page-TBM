@@ -13,7 +13,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 2,
     exp_max: 4,
-    pay: "₹8–12 LPA",
+    pay: "₹65k–1L / month",
     status: "Open",
     problem: "Turn a vague ask into a sharp brief everyone can act on."
   },
@@ -24,7 +24,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 1,
     exp_max: 3,
-    pay: "₹4–7 LPA",
+    pay: "₹35k–60k / month",
     status: "Open",
     problem: "Write lines people repeat, not lines people scroll past."
   },
@@ -35,7 +35,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 3,
     exp_max: 5,
-    pay: "₹10–15 LPA",
+    pay: "₹85k–1.25L / month",
     status: "Open",
     problem: "Start every conversation with the problem, not the pitch."
   },
@@ -46,7 +46,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 1,
     exp_max: 3,
-    pay: "₹5–8 LPA",
+    pay: "₹40k–65k / month",
     status: "Open",
     problem: "Turn a half-formed ask into a plan with dates and numbers on it."
   },
@@ -57,7 +57,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 1,
     exp_max: 3,
-    pay: "₹4–7 LPA",
+    pay: "₹35k–50k / month",
     status: "Open",
     problem: "Build relationships with creators where both sides pick up on the second ring."
   },
@@ -68,7 +68,7 @@ const ROLES = [
     type: "Internship",
     exp_min: 0,
     exp_max: 1,
-    pay: "₹15–20k/mo",
+    pay: "₹15–20k / month",
     status: "Open",
     problem: "Find the 50 creators no other agency has emailed yet."
   },
@@ -79,7 +79,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 2,
     exp_max: 4,
-    pay: "₹5–8 LPA",
+    pay: "₹35k–50k / month",
     status: "Open",
     problem: "Make shoot days feel so boringly well-run that everyone goes home on time."
   },
@@ -90,7 +90,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 2,
     exp_max: 4,
-    pay: "₹5–8 LPA",
+    pay: "₹40k–65k / month",
     status: "Open",
     problem: "Cut for the first three seconds without making the rest unwatchable."
   },
@@ -101,7 +101,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 1,
     exp_max: 3,
-    pay: "₹4–6 LPA",
+    pay: "₹35k–50k / month",
     status: "Open",
     problem: "Hire people who love the work, not only the agency's name."
   },
@@ -112,7 +112,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 2,
     exp_max: 4,
-    pay: "₹5–7 LPA",
+    pay: "₹40k–60k / month",
     status: "Open",
     problem: "Close books on the 4th, not the 24th."
   },
@@ -123,7 +123,7 @@ const ROLES = [
     type: "Full-time",
     exp_min: 2,
     exp_max: 4,
-    pay: "₹6–9 LPA",
+    pay: "₹50k–75k / month",
     status: "Open",
     problem: "Help an exclusive roster build careers that outlast any one algorithm shift."
   }

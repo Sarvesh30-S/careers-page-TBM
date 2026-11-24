@@ -382,10 +382,11 @@ export const RolesView: React.FC<RolesViewProps> = ({
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="re-pay">Pay range</label>
+                  <label htmlFor="re-pay">Pay range (monthly)</label>
                   <input
                     id="re-pay"
                     type="text"
+                    placeholder="e.g. ₹50k–75k / month"
                     value={formData.pay}
                     onChange={(e) =>
                       setFormData({ ...formData, pay: e.target.value })

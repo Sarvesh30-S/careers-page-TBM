@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { Applicant, Role, DashboardRolePermission } from "@/types";
 import { DEPTS, STAGES } from "@/data/data";
-import { fitOf } from "@/lib/dashboard";
+import { fitOf, formatMonthly } from "@/lib/dashboard";
 
 interface ApplicantsViewProps {
   applicants: Applicant[];
@@ -97,8 +97,18 @@ export const ApplicantsView: React.FC<ApplicantsViewProps> = ({
         if (Number(a.total) < lo || Number(a.total) > hi) return false;
       }
 
-      if (min !== "" && Number(a.ectc) < Number(min)) return false;
-      if (max !== "" && Number(a.ectc) > Number(max)) return false;
+      if (min !== "") {
+        const minNum = Number(min);
+        const aMonthly =
+          Number(a.ectc) <= 200 ? (Number(a.ectc) * 100000) / 12 : Number(a.ectc);
+        if (aMonthly < minNum) return false;
+      }
+      if (max !== "") {
+        const maxNum = Number(max);
+        const aMonthly =
+          Number(a.ectc) <= 200 ? (Number(a.ectc) * 100000) / 12 : Number(a.ectc);
+        if (aMonthly > maxNum) return false;
+      }
       if (notice && a.notice !== notice) return false;
 
       return true;
@@ -108,7 +118,10 @@ export const ApplicantsView: React.FC<ApplicantsViewProps> = ({
       name: (a) => a.name?.toLowerCase() || "",
       stage: (a) => STAGES.indexOf(a.stage),
       total: (a) => Number(a.total) || 0,
-      ectc: (a) => Number(a.ectc) || 0,
+      ectc: (a) =>
+        (Number(a.ectc) <= 200
+          ? (Number(a.ectc) * 100000) / 12
+          : Number(a.ectc)) || 0,
       notice: (a) => parseInt(a.notice) || 0,
       fit: (a) => fitOf(a, roles).score,
       applied: (a) => new Date(a.applied || a.appliedAt || "").getTime() || 0,
@@ -216,18 +229,18 @@ export const ApplicantsView: React.FC<ApplicantsViewProps> = ({
             <input
               type="number"
               id="fmin"
-              placeholder="Min ₹L"
+              placeholder="Min ₹/mo"
               value={min}
               onChange={(e) => setMin(e.target.value)}
-              aria-label="Minimum expected CTC, lakhs"
+              aria-label="Minimum expected monthly pay, rupees"
             />
             <input
               type="number"
               id="fmax"
-              placeholder="Max ₹L"
+              placeholder="Max ₹/mo"
               value={max}
               onChange={(e) => setMax(e.target.value)}
-              aria-label="Maximum expected CTC, lakhs"
+              aria-label="Maximum expected monthly pay, rupees"
             />
           </>
         )}
@@ -313,7 +326,7 @@ export const ApplicantsView: React.FC<ApplicantsViewProps> = ({
                   }
                 >
                   <button type="button" onClick={() => handleSort("ectc")}>
-                    Expected{sortField === "ectc" ? (sortDir > 0 ? " ↑" : " ↓") : ""}
+                    Expected / mo{sortField === "ectc" ? (sortDir > 0 ? " ↑" : " ↓") : ""}
                   </button>
                 </th>
               )}
@@ -392,7 +405,7 @@ export const ApplicantsView: React.FC<ApplicantsViewProps> = ({
                     </td>
                     <td className="num">{a.total} yrs</td>
                     {!hp && (
-                      <td className="num hide-m">₹{a.ectc} L</td>
+                      <td className="num hide-m">{formatMonthly(a.ectc)}</td>
                     )}
                     <td className="hide-m">{a.notice}</td>
                     <td className="num fitpill">{fitResult.score}</td>

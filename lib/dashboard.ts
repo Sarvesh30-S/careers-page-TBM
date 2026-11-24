@@ -102,13 +102,24 @@ export const fitOf = (a: Applicant, roles: Role[]): FitResult => {
   return { score: Math.min(100, Math.max(0, s)), why };
 };
 
+export const formatMonthly = (
+  val: number | string | undefined | null
+): string => {
+  if (val == null || val === "") return "—";
+  const num = Number(val);
+  if (Number.isNaN(num) || num <= 0) return "₹0 / mo";
+  // Convert legacy LPA values (<= 200) to monthly rupees gracefully:
+  const monthly = num <= 200 ? Math.round((num * 100000) / 12) : Math.round(num);
+  return `₹${monthly.toLocaleString("en-IN")} / mo`;
+};
+
 export const summaryOf = (a: Applicant, hidePay?: boolean): string => {
   const delta =
     a.ctc > 0 ? Math.round(((a.ectc - a.ctc) / a.ctc) * 100) : null;
   const pay =
     hidePay || !a.ectc
       ? ""
-      : ` Expects ₹${a.ectc} LPA${
+      : ` Expects ${formatMonthly(a.ectc)}${
           delta != null ? ` (${delta >= 0 ? "+" : ""}${delta}% on current)` : ""
         }.`;
 

@@ -6,17 +6,17 @@ const ARTIFACT_DIR = "C:/Users/sarve/.gemini/antigravity/brain/512a23dc-79b7-46b
 
 // Reference data
 const EXPECTED_ROLES = [
-  { id: "creative-strategist", title: "Creative Strategist", dept: "Creative Team", type: "Full-time", exp: "2–4 yrs", pay: "₹8–12 LPA" },
-  { id: "copywriter", title: "Copywriter, English + Hinglish", dept: "Creative Team", type: "Full-time", exp: "1–3 yrs", pay: "₹4–7 LPA" },
-  { id: "brand-partnerships-manager", title: "Brand Partnerships Manager", dept: "Brand Partnerships", type: "Full-time", exp: "3–5 yrs", pay: "₹10–15 LPA" },
-  { id: "brand-solutions-executive", title: "Brand Solutions Executive", dept: "Brand Solutions", type: "Full-time", exp: "1–3 yrs", pay: "₹5–8 LPA" },
-  { id: "ir-executive-south", title: "Influencer Relations Executive, South", dept: "Influencer Relations", type: "Full-time", exp: "1–3 yrs", pay: "₹4–6 LPA" },
-  { id: "ir-intern", title: "Influencer Relations Intern", dept: "Influencer Relations", type: "Internship", exp: "0–1 yr", pay: "₹15–20k a month" },
-  { id: "production-executive", title: "Production Executive, TBM Studio", dept: "Production", type: "Full-time", exp: "1–3 yrs", pay: "₹4–6 LPA" },
-  { id: "video-editor", title: "Video Editor, Performance", dept: "Post-Production", type: "Full-time", exp: "2–4 yrs", pay: "₹5–8 LPA" },
-  { id: "hr-executive", title: "HR Executive", dept: "Human Resources", type: "Full-time", exp: "1–3 yrs", pay: "₹4–6 LPA" },
-  { id: "finance-executive", title: "Finance Executive", dept: "Finance", type: "Full-time", exp: "2–4 yrs", pay: "₹5–7 LPA" },
-  { id: "talent-manager", title: "Talent Manager", dept: "Talent Management", type: "Full-time", exp: "2–4 yrs", pay: "₹6–9 LPA" },
+  { id: "creative-strategist", title: "Creative Strategist", dept: "Creative Team", type: "Full-time", exp: "2–4 yrs", pay: "₹65k–1L / month" },
+  { id: "copywriter", title: "Copywriter, English + Hinglish", dept: "Creative Team", type: "Full-time", exp: "1–3 yrs", pay: "₹35k–60k / month" },
+  { id: "brand-partnerships-manager", title: "Brand Partnerships Manager", dept: "Brand Partnerships", type: "Full-time", exp: "3–5 yrs", pay: "₹85k–1.25L / month" },
+  { id: "brand-solutions-executive", title: "Brand Solutions Executive", dept: "Brand Solutions", type: "Full-time", exp: "1–3 yrs", pay: "₹40k–65k / month" },
+  { id: "ir-executive-south", title: "Influencer Relations Executive, South", dept: "Influencer Relations", type: "Full-time", exp: "1–3 yrs", pay: "₹35k–50k / month" },
+  { id: "ir-intern", title: "Influencer Relations Intern", dept: "Influencer Relations", type: "Internship", exp: "0–1 yr", pay: "₹15–20k / month" },
+  { id: "production-executive", title: "Production Executive, TBM Studio", dept: "Production", type: "Full-time", exp: "1–3 yrs", pay: "₹35k–50k / month" },
+  { id: "video-editor", title: "Video Editor, Performance", dept: "Post-Production", type: "Full-time", exp: "2–4 yrs", pay: "₹40k–65k / month" },
+  { id: "hr-executive", title: "HR Executive", dept: "Human Resources", type: "Full-time", exp: "1–3 yrs", pay: "₹35k–50k / month" },
+  { id: "finance-executive", title: "Finance Executive", dept: "Finance", type: "Full-time", exp: "2–4 yrs", pay: "₹40k–60k / month" },
+  { id: "talent-manager", title: "Talent Manager", dept: "Talent Management", type: "Full-time", exp: "2–4 yrs", pay: "₹50k–75k / month" },
 ];
 
 async function verifyAll11Roles() {
