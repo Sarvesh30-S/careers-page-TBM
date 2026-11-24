@@ -37,18 +37,23 @@ export const DepartmentFilter: React.FC<DepartmentFilterProps> = ({
     if (timerRef.current) clearTimeout(timerRef.current);
 
     if (!isExpanded) {
-      // 1. Initially collapsed: clicking "All 11" expands and reveals department chips
+      // 1. Initially collapsed: clicking "All 11" expands, reveals department chips, and turns black
       setIsExpanded(true);
       setIsClosing(false);
       onSelectDept("All");
     } else {
-      // 2. Expanded: clicking "All" restores "All" filter and collapses the department list
-      onSelectDept("All");
-      setIsClosing(true);
-      timerRef.current = setTimeout(() => {
-        setIsExpanded(false);
-        setIsClosing(false);
-      }, 180);
+      // 2. Expanded:
+      if (selectedDept !== "All") {
+        // If another department was selected, clicking All restores All selection (turning black)
+        onSelectDept("All");
+      } else {
+        // If All was already selected and clicked again, collapse back to initial white state
+        setIsClosing(true);
+        timerRef.current = setTimeout(() => {
+          setIsExpanded(false);
+          setIsClosing(false);
+        }, 180);
+      }
     }
   };
 
@@ -60,6 +65,8 @@ export const DepartmentFilter: React.FC<DepartmentFilterProps> = ({
 
   const allCount = roleCounts["All"] ?? 0;
   const isAllSelected = selectedDept === "All";
+  // White initially when collapsed; turns black when clicked/expanded and selected
+  const isAllActive = isExpanded && isAllSelected;
 
   return (
     <div
@@ -68,11 +75,11 @@ export const DepartmentFilter: React.FC<DepartmentFilterProps> = ({
       role="group"
       aria-label="Filter by department"
     >
-      {/* All Filter Chip - Always Visible: Black with white text when selected (initial load & expanded) */}
+      {/* All Filter Chip - White initially, turns black when clicked */}
       <button
         type="button"
         className="chip"
-        aria-pressed={isAllSelected}
+        aria-pressed={isAllActive}
         aria-expanded={isExpanded}
         data-dept="All"
         onClick={handleAllClick}
