@@ -2660,3 +2660,62 @@ td.empty {
   align-items: center;
   box-sizing: border-box;
 }
+
+/* Custom Cursor Effect (Ring + Center Dot) */
+@media (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor .btn,
+  body.has-custom-cursor .chip,
+  body.has-custom-cursor .rolerow,
+  body.has-custom-cursor .link,
+  body.has-custom-cursor .qopt,
+  body.has-custom-cursor select,
+  body.has-custom-cursor summary,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor label {
+    cursor: none !important;
+  }
+
+  body.has-custom-cursor input,
+  body.has-custom-cursor textarea {
+    cursor: text !important;
+  }
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 999998;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor-ring.hovered {
+  border-color: #ffffff;
+}

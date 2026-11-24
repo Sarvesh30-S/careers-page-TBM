@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -74,7 +75,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }
