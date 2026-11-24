@@ -21,8 +21,8 @@ export const CustomCursor: React.FC = () => {
 
     let mouseX = -100;
     let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
+    let cursorX = -100;
+    let cursorY = -100;
     let targetScale = 1;
     let currentScale = 1;
     let dotTargetScale = 1;
@@ -35,8 +35,8 @@ export const CustomCursor: React.FC = () => {
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) {
-        ringX = e.clientX;
-        ringY = e.clientY;
+        cursorX = e.clientX;
+        cursorY = e.clientY;
         isVisible = true;
       }
       mouseX = e.clientX;
@@ -77,25 +77,27 @@ export const CustomCursor: React.FC = () => {
     document.documentElement.addEventListener("mouseenter", onMouseEnter);
 
     const animate = () => {
-      // Lerp ring position and scale for ultra-fluid momentum
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
+      // Both ring and inside dot track the exact same coordinates so they move in perfect parallel lockstep
+      cursorX += (mouseX - cursorX) * 0.22;
+      cursorY += (mouseY - cursorY) * 0.22;
 
       targetScale = isMouseDown ? 0.85 : isInteractive ? 1.4 : 1;
-      currentScale += (targetScale - currentScale) * 0.18;
+      currentScale += (targetScale - currentScale) * 0.2;
 
-      dotTargetScale = isMouseDown ? 0.8 : isInteractive ? 1.2 : 1;
+      dotTargetScale = isMouseDown ? 0.75 : isInteractive ? 1.2 : 1;
       currentDotScale += (dotTargetScale - currentDotScale) * 0.25;
 
       const show = isVisible && !isOverInput;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0) scale(${currentDotScale})`;
+        // Dot is 4px, centered at (cursorX - 2, cursorY - 2)
+        dotRef.current.style.transform = `translate3d(${cursorX - 2}px, ${cursorY - 2}px, 0) scale(${currentDotScale})`;
         dotRef.current.style.opacity = show ? "1" : "0";
       }
 
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX - 18}px, ${ringY - 18}px, 0) scale(${currentScale})`;
+        // Ring is 36px, centered at (cursorX - 18, cursorY - 18)
+        ringRef.current.style.transform = `translate3d(${cursorX - 18}px, ${cursorY - 18}px, 0) scale(${currentScale})`;
         ringRef.current.style.opacity = show ? (isInteractive ? "0.85" : "0.55") : "0";
         if (isInteractive) {
           ringRef.current.classList.add("hovered");

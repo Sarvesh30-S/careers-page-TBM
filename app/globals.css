@@ -2777,8 +2777,8 @@ td.empty {
   position: fixed;
   top: 0;
   left: 0;
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #ffffff;
   mix-blend-mode: difference;
