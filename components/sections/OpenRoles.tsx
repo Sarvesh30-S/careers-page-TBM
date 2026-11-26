@@ -102,9 +102,9 @@ export const OpenRoles: React.FC<OpenRolesProps> = ({ onApplyRole }) => {
       <div className="wrap">
         <div className="roles-head">
           <div>
-            <p className="kicker">Open roles</p>
+            <p className="kicker">Join our tribe</p>
             <h2 id="roles-h" className="sec-h">
-              Pick a problem worth owning.
+              Be a part of TBM&apos;s Tribe
             </h2>
           </div>
           <label className="search">

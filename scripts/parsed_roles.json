@@ -1,0 +1,518 @@
+[
+  {
+    "id": "creative-strategist",
+    "title": "Creative Strategist",
+    "dept": "Creative Team",
+    "type": "Full-time",
+    "exp": [
+      2,
+      4
+    ],
+    "pay": "₹8–12 LPA",
+    "status": "Closed",
+    "problem": "Turn a vague ask into a sharp brief everyone can act on.",
+    "resp": [
+      "Turn a business problem into a clear creative brief",
+      "Build narratives that work in English, Hindi and South Indian languages",
+      "Read results every week and drop what isn't working",
+      "Present your thinking with the math showing"
+    ],
+    "must": [
+      "2+ years in strategy or planning at an agency or brand",
+      "A portfolio of outcomes, not only outputs",
+      "Comfort with CTR, CVR and share of voice",
+      "Sharp, simple written English"
+    ],
+    "nice": [
+      "Works in a South Indian language"
+    ],
+    "metrics": "Ideas that move the number they were meant to move.",
+    "keys": [
+      "strategy",
+      "brief",
+      "data",
+      "insight",
+      "share of voice",
+      "regional",
+      "revenue",
+      "campaign"
+    ],
+    "langs": [
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam"
+    ]
+  },
+  {
+    "id": "copywriter",
+    "title": "Creative Writer",
+    "dept": "Creative Team",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹4–7 LPA",
+    "status": "Open",
+    "problem": "Write lines people repeat, not lines people scroll past.",
+    "resp": [
+      "Write hooks, scripts and captions for creator content",
+      "Adapt one idea across platforms without losing the point",
+      "Test two versions of every hook and keep the winner",
+      "Work with TBM Studio on shoot-day scripts"
+    ],
+    "must": [
+      "1+ year writing for brands or creators",
+      "Equally sharp in English and Hinglish",
+      "A portfolio with live work",
+      "Takes edits without taking them personally"
+    ],
+    "nice": [
+      "Has written for performance ads",
+      "Knows a regional language"
+    ],
+    "metrics": "Hook retention in the first three seconds and save rates.",
+    "keys": [
+      "copy",
+      "script",
+      "hook",
+      "hinglish",
+      "writing",
+      "caption"
+    ],
+    "langs": [
+      "Hindi"
+    ]
+  },
+  {
+    "id": "social-media-executive",
+    "title": "Social Media Executive",
+    "dept": "Creative Team",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹4–6 LPA",
+    "status": "Open",
+    "problem": "Run brand pages people actually choose to follow.",
+    "resp": [
+      "Plan and run monthly content calendars for two to three brand pages",
+      "Turn trends into posts within the same day, not the same week",
+      "Read page numbers every week and change what isn't working",
+      "Work with writers, designers and TBM Studio on every post"
+    ],
+    "must": [
+      "1+ year running social media for brands or creators",
+      "Knows Instagram, YouTube and LinkedIn from the inside",
+      "Can explain why a post worked, with numbers",
+      "Organised enough to never miss a go-live"
+    ],
+    "nice": [
+      "Basic Canva or editing skills",
+      "Has grown a page from scratch"
+    ],
+    "metrics": "Reach, saves and follower growth on the pages you run.",
+    "keys": [
+      "social",
+      "instagram",
+      "content calendar",
+      "trend",
+      "community",
+      "reels",
+      "analytics"
+    ],
+    "langs": []
+  },
+  {
+    "id": "production-intern",
+    "title": "Production Intern",
+    "dept": "Production",
+    "type": "Internship",
+    "exp": [
+      0,
+      1
+    ],
+    "pay": "₹15–20k a month",
+    "status": "Open",
+    "problem": "Learn how a shoot really runs, by running parts of one.",
+    "resp": [
+      "Help plan shoots: locations, props, call sheets",
+      "Track budgets and vendor bills",
+      "Be on set and keep the shoot day on time",
+      "Log and hand over footage to post-production"
+    ],
+    "must": [
+      "Curious about how ads and content get made",
+      "Organised and quick on follow-ups",
+      "Happy to be on set, on your feet",
+      "Available for 6 months, in office"
+    ],
+    "nice": [
+      "Has shot or assisted on any shoot, even a college one"
+    ],
+    "metrics": "Shoot days that start and wrap on time.",
+    "keys": [
+      "production",
+      "shoot",
+      "call sheet",
+      "set",
+      "vendor",
+      "crew"
+    ],
+    "langs": []
+  },
+  {
+    "id": "ir-intern",
+    "title": "Influencer Relations Intern",
+    "dept": "Influencer Relations",
+    "type": "Internship",
+    "exp": [
+      0,
+      1
+    ],
+    "pay": "₹15–20k a month",
+    "status": "Open",
+    "problem": "Learn how a creator campaign really runs, by running parts of one.",
+    "resp": [
+      "Shortlist creators against a brief",
+      "Track deliverables and go-live dates",
+      "Write first drafts of creator briefs",
+      "Sit in on negotiations and take notes that get used"
+    ],
+    "must": [
+      "Lives on Instagram and YouTube, and can explain why things work",
+      "Organised and quick on follow-ups",
+      "Available for 6 months, in office"
+    ],
+    "nice": [
+      "Speaks a regional language"
+    ],
+    "metrics": "Shortlists that get approved on the first pass.",
+    "keys": [
+      "creator",
+      "instagram",
+      "youtube",
+      "organised",
+      "influencer"
+    ],
+    "langs": []
+  },
+  {
+    "id": "brand-partnerships-manager",
+    "title": "Brand Partnerships Manager",
+    "dept": "Brand Partnerships",
+    "type": "Full-time",
+    "exp": [
+      3,
+      5
+    ],
+    "pay": "₹10–15 LPA",
+    "status": "Open",
+    "problem": "Start every conversation with the problem, not the pitch.",
+    "resp": [
+      "Build a pipeline of new partnerships",
+      "Lead discovery calls that start with the business, not the deck",
+      "Own proposals, pricing and closure",
+      "Hand over cleanly to Brand Solutions"
+    ],
+    "must": [
+      "3+ years in agency or media sales",
+      "A record of closed revenue you can talk through",
+      "Can read a P&L and a media plan",
+      "Calm in a room of CXOs"
+    ],
+    "nice": [
+      "Experience selling influencer or content work"
+    ],
+    "metrics": "Qualified pipeline, win rate and first-year account value.",
+    "keys": [
+      "sales",
+      "pipeline",
+      "revenue",
+      "pitch",
+      "client",
+      "closure",
+      "b2b"
+    ],
+    "langs": []
+  },
+  {
+    "id": "brand-solutions-executive",
+    "title": "Brand Solutions Executive",
+    "dept": "Brand Solutions",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹5–8 LPA",
+    "status": "Closed",
+    "problem": "Turn a half-formed ask into a plan with dates and numbers on it.",
+    "resp": [
+      "Run day-to-day communication on two to three accounts",
+      "Convert briefs into scoped plans, timelines and budgets",
+      "Track delivery against promises, with specific dates",
+      "Report results a CFO would accept"
+    ],
+    "must": [
+      "1+ year in client servicing or account management",
+      "Spreadsheets you'd be happy to share",
+      "Writes clear, short emails",
+      "Under-promises by habit"
+    ],
+    "nice": [
+      "Agency experience in influencer marketing"
+    ],
+    "metrics": "On-time delivery and partners who stay.",
+    "keys": [
+      "client",
+      "servicing",
+      "account",
+      "plan",
+      "budget",
+      "report"
+    ],
+    "langs": []
+  },
+  {
+    "id": "ir-executive-south",
+    "title": "Influencer Relations Executive, South",
+    "dept": "Influencer Relations",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹4–6 LPA",
+    "status": "Closed",
+    "problem": "Build a bench of Tamil, Telugu and Kannada creators people trust.",
+    "resp": [
+      "Discover and vet creators by audience quality, not follower count",
+      "Negotiate fair rates and clear deliverables",
+      "Keep creators paid on the date we promised",
+      "Maintain a creator database the team trusts"
+    ],
+    "must": [
+      "Fluent in Tamil, Telugu or Kannada",
+      "1+ year working with creators or talent",
+      "Knows how to read engagement beyond likes",
+      "Organised enough to run 30 creators at once"
+    ],
+    "nice": [
+      "Existing creator network in the South"
+    ],
+    "metrics": "Creator quality score, cost per view and repeat-creator rate.",
+    "keys": [
+      "creator",
+      "influencer",
+      "negotiat",
+      "regional",
+      "tamil",
+      "telugu",
+      "kannada",
+      "engagement"
+    ],
+    "langs": [
+      "Tamil",
+      "Telugu",
+      "Kannada"
+    ]
+  },
+  {
+    "id": "production-executive",
+    "title": "Production Executive, TBM Studio",
+    "dept": "Production",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹4–6 LPA",
+    "status": "Closed",
+    "problem": "Ship 30 shoots a month without anyone noticing the chaos.",
+    "resp": [
+      "Plan shoots: crew, location, props, permissions, call sheets",
+      "Hold budgets and timelines to the rupee and the hour",
+      "Run the floor on shoot day",
+      "Hand clean footage to post-production"
+    ],
+    "must": [
+      "1+ year in ad, film or content production",
+      "Can make a call sheet in your sleep",
+      "Stays calm when the location falls through",
+      "Owns a backup plan for every shoot"
+    ],
+    "nice": [
+      "Vendor network in Mumbai"
+    ],
+    "metrics": "Shoots delivered on time and on budget.",
+    "keys": [
+      "production",
+      "shoot",
+      "call sheet",
+      "budget",
+      "vendor",
+      "crew"
+    ],
+    "langs": []
+  },
+  {
+    "id": "video-editor",
+    "title": "Video Editor, Performance",
+    "dept": "Post-Production",
+    "type": "Full-time",
+    "exp": [
+      2,
+      4
+    ],
+    "pay": "₹5–8 LPA",
+    "status": "Closed",
+    "problem": "Cut for the first three seconds, because that's all you get.",
+    "resp": [
+      "Edit creator and studio footage for Reels, Shorts and ads",
+      "Cut three hook variants for every video",
+      "Read retention graphs and re-cut what drops",
+      "Keep a clean, shareable project library"
+    ],
+    "must": [
+      "2+ years editing short-form or ads",
+      "Premiere Pro or Final Cut, plus After Effects basics",
+      "A reel with performance numbers if you have them",
+      "Fast without being sloppy"
+    ],
+    "nice": [
+      "Motion graphics",
+      "Colour grading"
+    ],
+    "metrics": "3-second hold rate and completion rate.",
+    "keys": [
+      "edit",
+      "premiere",
+      "after effects",
+      "reels",
+      "retention",
+      "motion"
+    ],
+    "langs": []
+  },
+  {
+    "id": "hr-executive",
+    "title": "HR Executive",
+    "dept": "Human Resources",
+    "type": "Full-time",
+    "exp": [
+      1,
+      3
+    ],
+    "pay": "₹4–6 LPA",
+    "status": "Closed",
+    "problem": "Hire faster without lowering the bar.",
+    "resp": [
+      "Run hiring end to end: sourcing, screening, interviews, offers",
+      "Rebuild the slow steps in our hiring funnel, with data",
+      "Own onboarding for every new joiner",
+      "Keep the team's pulse, and act on what you hear"
+    ],
+    "must": [
+      "1+ year in HR or talent acquisition",
+      "Comfort with funnel numbers and simple dashboards",
+      "Writes warm, clear, specific emails",
+      "Keeps promises to candidates, on time"
+    ],
+    "nice": [
+      "Agency or startup HR experience",
+      "A background in psychology or org behaviour"
+    ],
+    "metrics": "Time-to-hire, offer acceptance rate and 90-day retention.",
+    "keys": [
+      "hiring",
+      "recruit",
+      "onboarding",
+      "talent",
+      "funnel",
+      "hr",
+      "people"
+    ],
+    "langs": []
+  },
+  {
+    "id": "finance-executive",
+    "title": "Finance Executive",
+    "dept": "Finance",
+    "type": "Full-time",
+    "exp": [
+      2,
+      4
+    ],
+    "pay": "₹5–7 LPA",
+    "status": "Closed",
+    "problem": "Make sure every creator is paid on the date we promised. Every time.",
+    "resp": [
+      "Run payables for creators and vendors",
+      "Reconcile ledgers and bank every week",
+      "Handle GST and TDS filings with our CA",
+      "Build a monthly cash view the founders can read in 2 minutes"
+    ],
+    "must": [
+      "2+ years in accounts, ideally agency or services",
+      "Tally or Zoho Books, and strong Excel",
+      "GST and TDS basics",
+      "Treats a payment date as a promise"
+    ],
+    "nice": [
+      "CA Inter or similar"
+    ],
+    "metrics": "On-time payments and month-end close in 5 working days.",
+    "keys": [
+      "finance",
+      "gst",
+      "tds",
+      "payables",
+      "reconcil",
+      "tally",
+      "excel",
+      "accounts"
+    ],
+    "langs": []
+  },
+  {
+    "id": "talent-manager",
+    "title": "Talent Manager",
+    "dept": "Talent Management",
+    "type": "Full-time",
+    "exp": [
+      2,
+      4
+    ],
+    "pay": "₹6–9 LPA",
+    "status": "Closed",
+    "problem": "Grow creators' careers, not only their follower counts.",
+    "resp": [
+      "Manage a roster of 10 to 15 creators",
+      "Plan their content, brand deals and growth",
+      "Negotiate deals that protect the creator's long-term value",
+      "Spot rising creators before they peak"
+    ],
+    "must": [
+      "2+ years in talent management or creator partnerships",
+      "Strong negotiation record",
+      "Understands platform algorithms and audience data",
+      "Creators would call you first"
+    ],
+    "nice": [
+      "Regional creator network"
+    ],
+    "metrics": "Roster earnings growth and creator retention.",
+    "keys": [
+      "talent",
+      "creator",
+      "negotiat",
+      "roster",
+      "brand deal",
+      "growth"
+    ],
+    "langs": []
+  }
+]

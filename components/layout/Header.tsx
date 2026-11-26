@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className="nav">
       <div className="wrap">
-        <Link href="#top" aria-label="TheBoredMonkey home">
+        <a href="https://theboredmonkey.com/#" aria-label="TheBoredMonkey home">
           {/* Authentic dual-theme logo elements */}
           <img
             className="logo logo-light"
@@ -21,7 +21,7 @@ export default function Header() {
             width={137}
             height={24}
           />
-        </Link>
+        </a>
 
         <nav aria-label="Main">
           <ul>
@@ -29,18 +29,19 @@ export default function Header() {
               <Link href="#top">Careers</Link>
             </li>
             <li>
-              <Link href="#life">Life at TBM</Link>
+              <Link href="#life">TBM&apos;s Tribe</Link>
             </li>
             <li>
-              <Link href="#hiring">How we hire</Link>
+              <Link href="#think">How we think</Link>
+            </li>
+            <li>
+              <Link href="#values">Core values</Link>
+            </li>
+            <li>
+              <Link href="#roles">Open roles</Link>
             </li>
           </ul>
         </nav>
-
-        <Link className="btn primary sm" href="#roles">
-          <span className="btn-text">View openings</span>
-          <span className="arr" aria-hidden="true">→</span>
-        </Link>
       </div>
     </header>
   );

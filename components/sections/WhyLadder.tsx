@@ -105,7 +105,7 @@ export default function WhyLadder() {
       style={{ marginTop: "clamp(56px, 9vw, 120px)" }}
     >
       <div className="wrap">
-        <p className="kicker">Life at TBM · first principles</p>
+        <p className="kicker">TBM&apos;s Tribe · first principles</p>
         <h2 id="life-h" className="sec-h" style={{ maxWidth: "17ch" }}>
           We ask why until it gets uncomfortable. Then once more.
         </h2>

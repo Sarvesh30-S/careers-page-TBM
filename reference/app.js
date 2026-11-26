@@ -22,7 +22,7 @@ let toastT;
 const toast = (m) => { toastEl.textContent = m; toastEl.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("on"), 2400); };
 
 /* ---------- state ---------- */
-const VER = "tbm-careers-proto-v1";
+const VER = "tbm-careers-proto-v2";
 const seed = () => ({
   roles: D.ROLES.map((r) => ({ ...r, location: "Lower Parel, Mumbai" })),
   apps: D.APPLICANTS.map((a) => ({
@@ -82,9 +82,7 @@ const LADDERS = [
   { tab: "A tight deadline", steps: ["Let's promise it by Friday.", "Because they want it fast.", "Because they're worried it will slip.", "Because last time, it did.", "Promise Tuesday 2 PM. Deliver Monday. Trust beats speed."] },
 ];
 let lad = 0, lstep = -1;
-const ladder = $("#ladder");
-ladder.style.setProperty("--n", LADDERS[0].steps.length);
-$("#ltabs").innerHTML = LADDERS.map((l, i) => `<button class="chip" role="tab" aria-selected="${i === 0}" aria-pressed="${i === 0}" data-lad="${i}">${l.tab}</button>`).join("");
+$("#ltabs").innerHTML = LADDERS.map((l, i) => `<button class="chip" aria-pressed="${i === 0}" data-lad="${i}">${l.tab}</button>`).join("");
 function drawLadder(step, force) {
   if (step === lstep && !force) return; lstep = step;
   const L = LADDERS[lad].steps, last = L.length - 1, root = step === last;
@@ -94,17 +92,42 @@ function drawLadder(step, force) {
   $("#lwhy").textContent = step === 0 ? "Sounds reasonable. But why?" : root ? "So the real fix:" : "Why?";
   const st = $("#lstate"); st.classList.toggle("root", root);
   st.innerHTML = esc(L[step]); st.style.animation = "none"; void st.offsetWidth; st.style.animation = "";
+  $("#lnext").innerHTML = root ? `Try another request` : `${step === 0 ? "Ask why" : "Next why"} <span class="arr" aria-hidden="true">→</span>`;
 }
-function ladderScroll() {
-  const r = ladder.getBoundingClientRect(), n = LADDERS[lad].steps.length;
-  const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
-  drawLadder(Math.min(n - 1, Math.floor(p * n)));
+
+/* ---- games: one panel, three tabs ---- */
+const GT = $$("#gtabs [role=tab]");
+function showGame(i, focus) {
+  GT.forEach((b, k) => { const on = k === i; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; $("#g-" + k).hidden = !on; });
+  if (focus) GT[i].focus();
 }
-function ladderJump(i) {
-  const r = ladder.getBoundingClientRect(), n = LADDERS[lad].steps.length;
-  const y = scrollY + r.top + ((i + 0.5) / n) * (r.height - innerHeight);
-  window.scrollTo({ top: y, behavior: RM ? "auto" : "smooth" });
+$("#gtabs").addEventListener("keydown", (e) => {
+  const i = GT.indexOf(document.activeElement); if (i < 0) return;
+  const k = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: GT.length - 1 }[e.key];
+  if (k === undefined) return; e.preventDefault(); showGame((k + GT.length) % GT.length, true);
+});
+
+/* ---- team gallery ---- */
+const gal = $("#photo");
+gal.innerHTML = D.GALLERY.map((g, i) => g.src
+  ? `<figure class="photo" aria-roledescription="slide" aria-label="${i + 1} of ${D.GALLERY.length}"><img src="${esc(g.src)}"${g.srcset ? ` srcset="${esc(g.srcset)}"` : ""} sizes="(max-width:1200px) 92vw, 1200px" alt="${esc(g.alt)}" width="1800" height="1350" ${i ? 'loading="lazy" ' : ""}decoding="async"></figure>`
+  : `<figure class="photo empty" aria-roledescription="slide" aria-label="${i + 1} of ${D.GALLERY.length}, photo coming soon"><div><b>Photo ${i + 1}</b><span class="small">Team photo goes here</span></div></figure>`).join("");
+const slides = $$(".photo", gal);
+let gi = 0;
+const galGo = (i) => { i = Math.max(0, Math.min(slides.length - 1, i)); gal.scrollTo({ left: slides[i].offsetLeft - gal.offsetLeft, behavior: RM ? "auto" : "smooth" }); };
+function galSync() {
+  const x = gal.scrollLeft, max = gal.scrollWidth - gal.clientWidth;
+  gi = x >= max - 4 ? slides.length - 1 : slides.reduce((best, el, i) => (Math.abs(el.offsetLeft - gal.offsetLeft - x) < Math.abs(slides[best].offsetLeft - gal.offsetLeft - x) ? i : best), 0);
+  $("#gcount").textContent = `${gi + 1} / ${slides.length}`;
+  $('[data-gal="-1"]').disabled = gi === 0; $('[data-gal="1"]').disabled = gi === slides.length - 1;
 }
+gal.addEventListener("scroll", () => requestAnimationFrame(galSync), { passive: true });
+gal.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); galGo(gi + (e.key === "ArrowRight" ? 1 : -1)); } });
+galSync();
+
+/* ---- brand strip ---- */
+const brandList = (hidden) => `<ul class="mq-list"${hidden ? ' aria-hidden="true"' : ""}>${D.BRANDS.map((b) => `<li>${b.logo ? `<img src="${esc(b.logo)}" alt="${hidden ? "" : esc(b.name)}" loading="lazy">` : esc(b.name)}</li>`).join("")}</ul>`;
+$("#brands").innerHTML = `<div class="mq-track">${brandList(false)}${brandList(true)}</div>`;
 
 /* ---- and then what? ---- */
 const CHAINS = [
@@ -121,7 +144,7 @@ const CHAINS = [
 let tw = 0;
 function drawChain(choice) {
   const c = CHAINS[tw];
-  $("#twtabs").innerHTML = CHAINS.map((x, i) => `<button class="chip" role="tab" aria-selected="${i === tw}" aria-pressed="${i === tw}" data-tw="${i}">${x.tab}</button>`).join("");
+  $("#twtabs").innerHTML = CHAINS.map((x, i) => `<button class="chip" aria-pressed="${i === tw}" data-tw="${i}">${x.tab}</button>`).join("");
   $("#twq").textContent = c.q;
   $("#twopts").innerHTML = c.opts.map((o, i) => `<button class="chip" aria-pressed="${choice === i}" data-twopt="${i}">${o.label}</button>`).join("");
   if (choice == null) { $("#chain").innerHTML = `<li class="hint">Pick one to see what happens next.</li>`; return; }
@@ -161,29 +184,16 @@ function drawQuiz() {
 }
 drawQuiz();
 
-/* ---- hiring steps ---- */
-const STEPS6 = [
-  ["Apply", "Day 0", "10 minutes. Three questions that make you think. No cover letter."],
-  ["We reply", "Within 48 hours", "Yes or no, you'll hear from a person."],
-  ["A 30-minute call", "Week 2", "About how you think, not your CV line by line."],
-  ["A small, real task", "Two hours, max", "A real problem, sized for an evening. We'll tell you exactly what we're looking for."],
-  ["Meet the team", "Week 3", "The people you'd work with, not only the boss. Ask them anything."],
-  ["Decision", "Within 5 working days", "Of your last conversation. If it's a no, we'll tell you why."],
-];
-$("#steps").innerHTML = STEPS6.map(([t, w, p]) => `<li><h3><small>${w}</small>${t}</h3><p>${p}</p></li>`).join("");
 
 /* ---- one scroll loop for everything scroll-driven ---- */
-const photo = $("#photo"), stepsEl = $("#steps");
+const photo = $("#photo");
 let ticking = false;
 function onScroll() {
   ticking = false;
   if (document.body.classList.contains("dash")) return;
-  ladderScroll(); valuesScroll();
+  valuesScroll();
   const vh = innerHeight;
   if (!RM) { const r = photo.getBoundingClientRect(); const p = Math.min(1, Math.max(0, 1 - r.top / vh)); photo.style.setProperty("--z", (1.1 - 0.1 * p).toFixed(4)); }
-  const sr = stepsEl.getBoundingClientRect(); const fill = Math.min(1, Math.max(0, (vh * 0.6 - sr.top) / sr.height));
-  stepsEl.style.setProperty("--fill", fill.toFixed(3));
-  $$("li", stepsEl).forEach((li) => li.classList.toggle("on", li.getBoundingClientRect().top < vh * 0.6));
 }
 addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 addEventListener("resize", onScroll);
@@ -193,7 +203,8 @@ let dept = "All", rq = "";
 const openRoles = () => S.roles.filter((r) => r.status === "Open");
 function renderChips() {
   const o = openRoles();
-  $("#deptchips").innerHTML = ["All", ...D.DEPTS].map((d) => {
+  if (dept !== "All" && !o.some((r) => r.dept === dept)) dept = "All";
+  $("#deptchips").innerHTML = ["All", ...D.DEPTS.filter((d) => o.some((r) => r.dept === d))].map((d) => {
     const n = d === "All" ? o.length : o.filter((r) => r.dept === d).length;
     return `<button class="chip" aria-pressed="${d === dept}" data-dept="${esc(d)}">${esc(d)} <span style="opacity:.55">${n}</span></button>`;
   }).join("");
@@ -283,7 +294,7 @@ function control(f) {
     case "select": case "dropdown":
       return `<select id="${id}" name="${f.id}" ${desc} ${req}><option value="">Choose…</option>${(f.options || []).map((o) => `<option ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
     case "dept":
-      return `<select id="${id}" name="dept" ${desc} required>${D.DEPTS.map((o) => `<option ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+      return `<select id="${id}" name="dept" ${desc} required>${D.DEPTS.filter((o) => o === v || openRoles().some((r) => r.dept === o)).map((o) => `<option ${v === o ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
     case "role": {
       const rs = openRoles().filter((r) => r.dept === ap.v.dept);
       return `<select id="${id}" name="role" ${desc} required><option value="">${rs.length ? "Choose…" : "No open roles in this team"}</option>${rs.map((r) => `<option value="${r.id}" ${v === r.id ? "selected" : ""}>${esc(r.title)}</option>`).join("")}</select>`;
@@ -829,8 +840,12 @@ document.addEventListener("click", async (e) => {
   const t = e.target.closest("button, a, tr, [data-card], [data-drop]"); if (!t) { if (e.target === modal) closeModal(); return; }
   const d = t.dataset;
   if (d.tue) { const row = t.closest(".value"); const o = row.classList.toggle("open"); t.setAttribute("aria-expanded", o); return; }
-  if (d.lad) { lad = Number(d.lad); ladder.style.setProperty("--n", LADDERS[lad].steps.length); $$("[data-lad]").forEach((b) => { b.setAttribute("aria-pressed", b === t); b.setAttribute("aria-selected", b === t); }); lstep = -1; ladderScroll(); return; }
-  if (d.lstep) return ladderJump(Number(d.lstep));
+  if (t.matches('a[href="#think"]')) showGame(0);
+  if (d.game) return showGame(Number(d.game));
+  if (d.gal) return galGo(gi + Number(d.gal));
+  if (d.lad) { lad = Number(d.lad); $$("[data-lad]").forEach((b) => b.setAttribute("aria-pressed", b === t)); drawLadder(0, true); return; }
+  if (d.lstep) return drawLadder(Number(d.lstep));
+  if (d.lnext !== undefined) { const n = LADDERS[lad].steps.length; if (lstep < n - 1) drawLadder(lstep + 1); else { lad = (lad + 1) % LADDERS.length; $$("[data-lad]").forEach((b, k) => b.setAttribute("aria-pressed", k === lad)); drawLadder(0, true); } return; }
   if (d.tw) { tw = Number(d.tw); drawChain(null); return; }
   if (d.twopt) return drawChain(Number(d.twopt));
   if (d.q) { qa.push(d.q === "1"); drawQuiz(); $("#quiz .qopt")?.focus(); return; }

@@ -822,7 +822,6 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           {isSubmitted ? (
             /* Confirmation Screen */
             <div className="done-screen">
-              <p className="muted small">Reference {referenceId}</p>
               <h3 id="ap-title">
                 Application in. Thank you, {firstName}.
               </h3>

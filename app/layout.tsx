@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Careers at TBM",
   description:
-    "Curiosity gets you in. Courage gets you heard. Careers at TheBoredMonkey, Lower Parel, Mumbai.",
+    "Curiosity gets you hired. Careers at TheBoredMonkey, Lower Parel, Mumbai.",
   icons: {
     icon: [
       { url: "/theboredmonkey-tbm-badge.png", type: "image/png" },
@@ -42,11 +42,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){
+  try {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (window.location.hash && window.location.hash !== '#dashboard') {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+  } catch(e){}
+
   try {
     var t = new URLSearchParams(window.location.search).get('theme');
     if (t) document.documentElement.setAttribute('data-theme', t);

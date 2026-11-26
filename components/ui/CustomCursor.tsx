@@ -77,15 +77,16 @@ export const CustomCursor: React.FC = () => {
     document.documentElement.addEventListener("mouseenter", onMouseEnter);
 
     const animate = () => {
-      // Both ring and inside dot track the exact same coordinates so they move in perfect parallel lockstep
-      cursorX += (mouseX - cursorX) * 0.22;
-      cursorY += (mouseY - cursorY) * 0.22;
+      // Both ring and inside dot smoothly trail behind the default cursor with a ~0.5s graceful delay
+      const ease = 0.08;
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
 
-      targetScale = isMouseDown ? 0.85 : isInteractive ? 1.4 : 1;
-      currentScale += (targetScale - currentScale) * 0.2;
+      targetScale = isMouseDown ? 0.85 : isInteractive ? 1.35 : 1;
+      currentScale += (targetScale - currentScale) * 0.15;
 
       dotTargetScale = isMouseDown ? 0.75 : isInteractive ? 1.2 : 1;
-      currentDotScale += (dotTargetScale - currentDotScale) * 0.25;
+      currentDotScale += (dotTargetScale - currentDotScale) * 0.18;
 
       const show = isVisible && !isOverInput;
 

@@ -31,32 +31,37 @@ export const RoleDetailDrawer: React.FC<RoleDetailDrawerProps> = ({
 
   // Focus management and body scroll locking
   useEffect(() => {
-    if (isOpen) {
-      lastActiveElementRef.current = document.activeElement as HTMLElement | null;
-      document.body.style.overflow = "hidden";
+  // Ensure body scroll lock is applied when drawer opens and always cleared on cleanup or unmount
+  if (isOpen) {
+    // Save previous overflow style
+    const prevOverflow = document.body.style.overflow;
+    lastActiveElementRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
 
-      const timer = setTimeout(() => {
-        closeBtnRef.current?.focus();
-      }, 60);
+    const timer = setTimeout(() => {
+      closeBtnRef.current?.focus();
+    }, 60);
 
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          onClose();
-        }
-      };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
 
-      window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener("keydown", handleKeyDown);
-        document.body.style.overflow = "";
-        lastActiveElementRef.current?.focus?.();
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [isOpen, onClose]);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("keydown", handleKeyDown);
+      // Restore previous overflow (or clear if it was empty)
+      document.body.style.overflow = prevOverflow;
+      lastActiveElementRef.current?.focus?.();
+    };
+  } else {
+    // When drawer is closed ensure overflow is reset
+    document.body.style.overflow = "";
+  }
+}, [isOpen, onClose]);
 
   if (!role || !mounted) return null;
 

@@ -3,12 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const LINE1 = "Curiosity gets you in.";
-const LINE2_PREFIX = "Courage gets you ";
-const MISTAKE_WORD = "weird.";
-const CORRECT_WORD = "heard.";
-const LINE2_MISTAKE = LINE2_PREFIX + MISTAKE_WORD; // "Courage gets you weird."
-const LINE2_FINAL = LINE2_PREFIX + CORRECT_WORD;   // "Courage gets you heard."
+const LINE1 = "Curiosity gets you hired.";
+const LINE2 = "Courage gets you heard.";
+const WORD = "Courage";
 
 interface HeroProps {
   isReady?: boolean;
@@ -20,9 +17,8 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
   const [line1, setLine1] = useState("");
   const [line2, setLine2] = useState("");
   const [isLine1Done, setIsLine1Done] = useState(false);
-  const [showOops, setShowOops] = useState(false);
-  const [isOopsFading, setIsOopsFading] = useState(false);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isLineDrawn, setIsLineDrawn] = useState(false);
   const hasFinishedRef = useRef(false);
 
   useEffect(() => {
@@ -35,166 +31,133 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
         window.location.hash === "#dashboard")
     ) {
       setLine1(LINE1);
-      setLine2(LINE2_FINAL);
+      setLine2(LINE2);
       setIsLine1Done(true);
-      setShowOops(false);
       setIsTypingComplete(true);
+      setIsLineDrawn(true);
       hasFinishedRef.current = true;
       onTypingComplete?.();
       return;
     }
 
     // Scroll to top on initial page load so typing is fully visible
-    if (typeof window !== "undefined" && !window.location.hash) {
+    if (typeof window !== "undefined" && window.location.hash !== "#dashboard") {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
 
     let l1 = 0;
     let l2 = 0;
     let timer: NodeJS.Timeout;
+    let lineTimer: NodeJS.Timeout;
+    let readyTimer: NodeJS.Timeout;
 
     const finishTyping = () => {
       if (hasFinishedRef.current) return;
       hasFinishedRef.current = true;
       setLine1(LINE1);
-      setLine2(LINE2_FINAL);
+      setLine2(LINE2);
       setIsLine1Done(true);
-      setShowOops(false);
       setIsTypingComplete(true);
-      onTypingComplete?.();
+
+      // Sequence:
+      // 1. Typing completes
+      // 2. Yellow line draws under "Courage"
+      // 3. After line completes drawing, reveal the rest of the page
+      lineTimer = setTimeout(() => {
+        setIsLineDrawn(true);
+        readyTimer = setTimeout(() => {
+          onTypingComplete?.();
+        }, 600);
+      }, 150);
     };
 
     // Allow user to click anywhere or press any key to skip typing
     const handleSkip = () => {
-      finishTyping();
+      if (hasFinishedRef.current) return;
+      hasFinishedRef.current = true;
+      clearTimeout(timer);
+      setLine1(LINE1);
+      setLine2(LINE2);
+      setIsLine1Done(true);
+      setIsTypingComplete(true);
+      setIsLineDrawn(true);
+      onTypingComplete?.();
     };
     window.addEventListener("click", handleSkip, { once: true });
     window.addEventListener("keydown", handleSkip, { once: true });
 
-    // Step 1: Type "Curiosity gets you in."
+    // Step 1: Type "Curiosity gets you hired."
     function stepLine1() {
       if (hasFinishedRef.current) return;
       if (l1 < LINE1.length) {
         l1++;
         setLine1(LINE1.slice(0, l1));
-        const delay = 34 + Math.floor(Math.random() * 10);
+        const delay = 30 + Math.floor(Math.random() * 8);
         timer = setTimeout(stepLine1, delay);
       } else {
         setIsLine1Done(true);
-        // Natural pause between line 1 and line 2
-        timer = setTimeout(stepTypeMistake, 180);
+        // Brief pause before line 2 starts
+        timer = setTimeout(stepLine2, 160);
       }
     }
 
-    // Step 2: Type "Courage gets you weird."
-    function stepTypeMistake() {
+    // Step 2: Type "Courage gets you heard."
+    function stepLine2() {
       if (hasFinishedRef.current) return;
-      if (l2 < LINE2_MISTAKE.length) {
+      if (l2 < LINE2.length) {
         l2++;
-        setLine2(LINE2_MISTAKE.slice(0, l2));
-        const delay = 34 + Math.floor(Math.random() * 10);
-        timer = setTimeout(stepTypeMistake, delay);
+        setLine2(LINE2.slice(0, l2));
+        const delay = 30 + Math.floor(Math.random() * 8);
+        timer = setTimeout(stepLine2, delay);
       } else {
-        // Step 3: Pause briefly (500ms) with the mistake on screen
-        timer = setTimeout(stepShowOops, 500);
+        finishTyping();
       }
     }
 
-    // Step 4 & 5: Display subtle "Oops!" badge for ~700ms
-    function stepShowOops() {
-      if (hasFinishedRef.current) return;
-      setShowOops(true);
-      setIsOopsFading(false);
-      timer = setTimeout(() => {
-        setIsOopsFading(true);
-        // Step 6: Begin backspacing the mistake
-        timer = setTimeout(stepBackspace, 160);
-      }, 700);
-    }
-
-    // Step 6: Backspace "weird." character by character
-    function stepBackspace() {
-      if (hasFinishedRef.current) return;
-      if (l2 > LINE2_PREFIX.length) {
-        l2--;
-        setLine2(LINE2_MISTAKE.slice(0, l2));
-        timer = setTimeout(stepBackspace, 45);
-      } else {
-        setShowOops(false);
-        // Step 7: Brief pause before typing the correct word "heard."
-        timer = setTimeout(stepTypeCorrect, 130);
-      }
-    }
-
-    // Step 7: Type "heard." character by character
-    let correctIdx = 0;
-    function stepTypeCorrect() {
-      if (hasFinishedRef.current) return;
-      if (correctIdx < CORRECT_WORD.length) {
-        correctIdx++;
-        setLine2(LINE2_PREFIX + CORRECT_WORD.slice(0, correctIdx));
-        const delay = 36 + Math.floor(Math.random() * 10);
-        timer = setTimeout(stepTypeCorrect, delay);
-      } else {
-        // Step 8: Typing complete! Leave final correct slogan and reveal page
-        setIsTypingComplete(true);
-        hasFinishedRef.current = true;
-        timer = setTimeout(() => {
-          onTypingComplete?.();
-        }, 140);
-      }
-    }
-
-    // Start typing after initial mount delay
-    timer = setTimeout(stepLine1, 100);
+    // Small delay before starting typewriter
+    timer = setTimeout(stepLine1, 150);
 
     return () => {
       clearTimeout(timer);
+      clearTimeout(lineTimer);
+      clearTimeout(readyTimer);
       window.removeEventListener("click", handleSkip);
       window.removeEventListener("keydown", handleSkip);
     };
   }, [onTypingComplete]);
 
-  // Determine displayed text
-  const displayLine1 = mounted ? line1 : LINE1;
-  const displayLine2 = mounted ? line2 : LINE2_FINAL;
-  const isComplete = mounted ? isTypingComplete : true;
+  // Determine displayed text (starts empty so typewriter begins cleanly from first letter)
+  const displayLine1 = line1;
+  const displayLine2 = line2;
 
   return (
     <section className="hero wrap" id="top">
-      <h1 className="kin" aria-label="Curiosity gets you in. Courage gets you heard.">
-        <span className="ln">
+      <h1
+        className="kin"
+        aria-label="Curiosity gets you hired. Courage gets you heard."
+      >
+        <span className="ln" suppressHydrationWarning>
           {displayLine1}
           {mounted && !isLine1Done && (
             <span className="type-cursor" aria-hidden="true" />
           )}
         </span>{" "}
-        <span className="ln">
-          {displayLine2.length <= 7 ? (
-            <mark className={isComplete ? "draw active" : "draw"}>
+        <span className="ln" suppressHydrationWarning>
+          {displayLine2.length <= WORD.length ? (
+            <mark className={isLineDrawn ? "draw active" : "draw"}>
               {displayLine2}
             </mark>
           ) : (
             <>
-              <mark className={isComplete ? "draw active" : "draw"}>
-                Courage
+              <mark className={isLineDrawn ? "draw active" : "draw"}>
+                {WORD}
               </mark>
-              {displayLine2.slice(7)}
+              {displayLine2.slice(WORD.length)}
             </>
           )}
-          {mounted && isLine1Done && !isComplete && (
+          {mounted && isLine1Done && !isTypingComplete && (
             <span className="type-cursor" aria-hidden="true" />
           )}
-          <span className="oops-anchor">
-            {showOops && (
-              <span
-                className={`oops-badge ${isOopsFading ? "fade-out" : ""}`}
-                aria-hidden="true"
-              >
-                Oops!
-              </span>
-            )}
-          </span>
         </span>
       </h1>
 
@@ -210,7 +173,7 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
             <span className="btn-text">View openings</span>
             <span className="arr" aria-hidden="true">→</span>
           </Link>
-          <Link className="btn ghost" href="#life">
+          <Link className="btn ghost" href="#think">
             See how we think
           </Link>
         </div>

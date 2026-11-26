@@ -180,3 +180,15 @@ export interface DashboardRolePermission {
   scope?: string;
   hidePay?: boolean;
 }
+
+export interface GalleryItem {
+  src: string;
+  srcset?: string;
+  alt: string;
+}
+
+export interface BrandItem {
+  name: string;
+  logo: string;
+}
+

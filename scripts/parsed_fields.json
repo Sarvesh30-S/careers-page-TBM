@@ -1,0 +1,296 @@
+[
+  {
+    "step": "personal",
+    "id": "name",
+    "label": "Full name",
+    "type": "text",
+    "required": true,
+    "on": true,
+    "locked": true
+  },
+  {
+    "step": "personal",
+    "id": "email",
+    "label": "Email",
+    "type": "email",
+    "required": true,
+    "on": true,
+    "locked": true
+  },
+  {
+    "step": "personal",
+    "id": "phone",
+    "label": "Phone / WhatsApp",
+    "type": "tel",
+    "required": true,
+    "on": true
+  },
+  {
+    "step": "personal",
+    "id": "age",
+    "label": "Age",
+    "type": "number",
+    "required": false,
+    "on": true,
+    "min": 16,
+    "max": 70
+  },
+  {
+    "step": "personal",
+    "id": "gender",
+    "label": "Gender",
+    "type": "select",
+    "required": false,
+    "on": true,
+    "options": [
+      "Woman",
+      "Man",
+      "Non-binary",
+      "Prefer not to say"
+    ],
+    "hint": "Optional. Used only to check our hiring is fair."
+  },
+  {
+    "step": "personal",
+    "id": "city",
+    "label": "Current city",
+    "type": "text",
+    "required": true,
+    "on": true
+  },
+  {
+    "step": "personal",
+    "id": "mumbai",
+    "label": "Open to working from our Lower Parel office?",
+    "type": "yesno",
+    "required": true,
+    "on": true
+  },
+  {
+    "step": "role",
+    "id": "dept",
+    "label": "Department",
+    "type": "dept",
+    "required": true,
+    "on": true,
+    "locked": true
+  },
+  {
+    "step": "role",
+    "id": "role",
+    "label": "Role",
+    "type": "role",
+    "required": true,
+    "on": true,
+    "locked": true
+  },
+  {
+    "step": "role",
+    "id": "joining",
+    "label": "Earliest joining date",
+    "type": "date",
+    "required": true,
+    "on": true
+  },
+  {
+    "step": "role",
+    "id": "notice",
+    "label": "Notice period",
+    "type": "select",
+    "required": true,
+    "on": true,
+    "options": [
+      "Immediate",
+      "15 days",
+      "30 days",
+      "60 days",
+      "90 days"
+    ]
+  },
+  {
+    "step": "role",
+    "id": "buyout",
+    "label": "Buyout possible?",
+    "type": "yesno",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "comp",
+    "id": "ctc",
+    "label": "Current CTC (₹ LPA)",
+    "type": "number",
+    "required": true,
+    "on": true,
+    "min": 0,
+    "max": 200,
+    "hint": "Put 0 if you're a student or between jobs."
+  },
+  {
+    "step": "comp",
+    "id": "ectc",
+    "label": "Expected CTC (₹ LPA)",
+    "type": "number",
+    "required": true,
+    "on": true,
+    "min": 0,
+    "max": 200
+  },
+  {
+    "step": "comp",
+    "id": "negotiable",
+    "label": "Is that negotiable?",
+    "type": "yesno",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "exp",
+    "id": "total",
+    "label": "Total experience (years)",
+    "type": "number",
+    "required": true,
+    "on": true,
+    "min": 0,
+    "max": 40
+  },
+  {
+    "step": "exp",
+    "id": "rel",
+    "label": "Relevant experience (years)",
+    "type": "number",
+    "required": true,
+    "on": true,
+    "min": 0,
+    "max": 40
+  },
+  {
+    "step": "exp",
+    "id": "lastco",
+    "label": "Last company",
+    "type": "text",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "exp",
+    "id": "lastdes",
+    "label": "Last designation",
+    "type": "text",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "exp",
+    "id": "langs",
+    "label": "Languages you work in",
+    "type": "langs",
+    "required": true,
+    "on": true,
+    "options": [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+      "Bengali",
+      "Gujarati",
+      "Urdu"
+    ]
+  },
+  {
+    "step": "links",
+    "id": "resume",
+    "label": "Resume",
+    "type": "file",
+    "required": true,
+    "on": true,
+    "locked": true,
+    "hint": "PDF or DOC, up to 5 MB."
+  },
+  {
+    "step": "links",
+    "id": "portfolio",
+    "label": "Portfolio link",
+    "type": "url",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "links",
+    "id": "linkedin",
+    "label": "LinkedIn",
+    "type": "url",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "links",
+    "id": "instagram",
+    "label": "Instagram handle or link",
+    "type": "text",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "about",
+    "id": "why",
+    "label": "Why TBM?",
+    "type": "long",
+    "required": true,
+    "on": true,
+    "hint": "Skip “passionate about marketing”. Tell us something specific."
+  },
+  {
+    "step": "about",
+    "id": "admire",
+    "label": "A campaign or creator you admire, and why it worked",
+    "type": "long",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "about",
+    "id": "problem",
+    "label": "Pick a brand. What business problem would you solve with influencers?",
+    "type": "long",
+    "required": true,
+    "on": true,
+    "hint": "Three lines is plenty. Name the number you'd move."
+  },
+  {
+    "step": "final",
+    "id": "source",
+    "label": "Where did you hear about us?",
+    "type": "select",
+    "required": false,
+    "on": true,
+    "options": [
+      "LinkedIn",
+      "Instagram",
+      "Referral",
+      "Naukri",
+      "College",
+      "Other"
+    ]
+  },
+  {
+    "step": "final",
+    "id": "referral",
+    "label": "Referred by (if anyone)",
+    "type": "text",
+    "required": false,
+    "on": true
+  },
+  {
+    "step": "final",
+    "id": "consent",
+    "label": "I agree that TBM may store my application for 12 months to consider me for roles. I can ask for deletion at any time.",
+    "type": "consent",
+    "required": true,
+    "on": true,
+    "locked": true
+  }
+]
