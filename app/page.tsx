@@ -15,6 +15,15 @@ export default function CareersPage() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    // Support ?theme=dark or ?theme=light URL parameter
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const theme = params.get("theme");
+      if (theme === "dark" || theme === "light") {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+    }
+
     // Ensure browser starts at the top and disable automatic scroll restoration
     if (typeof window !== "undefined") {
       if ("scrollRestoration" in window.history) {
