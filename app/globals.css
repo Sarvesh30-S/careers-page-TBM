@@ -3043,8 +3043,31 @@ td.empty {
   margin: 0 auto;
 }
 
-:root[data-theme="dark"] .alioth-page-nav .a-client img {
-  filter: brightness(1.2);
+:root[data-theme="dark"] .alioth-page-nav .a-client .a1 {
+  filter: grayscale(1) invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+:root[data-theme="dark"] .alioth-page-nav .a-client .a1:hover {
+  filter: grayscale(1) invert(1) brightness(1.25);
+  mix-blend-mode: screen;
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .alioth-page-nav .a-client .a1 {
+    filter: grayscale(1) invert(1);
+    mix-blend-mode: screen;
+    opacity: 0.85;
+  }
+  :root:not([data-theme="light"]) .alioth-page-nav .a-client .a1:hover {
+    filter: grayscale(1) invert(1) brightness(1.25);
+    mix-blend-mode: screen;
+    opacity: 1;
+    transform: scale(1.06);
+  }
 }
 
 @keyframes tbmMarquee {
