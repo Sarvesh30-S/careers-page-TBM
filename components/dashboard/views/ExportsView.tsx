@@ -15,14 +15,18 @@ interface ExportsViewProps {
 
 const GOOGLE_APPS_SCRIPT_CODE = `/**
  * The Bored Monkey (TBM) - Continuous Real-Time Google Sheet Sync
- * 1. In your Google Sheet, go to: Extensions > Apps Script
- * 2. Delete any existing code, paste this entire file, and click Save (disk icon).
- * 3. Click "Deploy" > "New deployment".
- * 4. Select type: "Web app".
+ * 
+ * INSTRUCTIONS:
+ * 1. In your Google Sheet ("career page data"), go to: Extensions > Apps Script
+ * 2. Delete any existing code, paste this entire code, and click Save (disk icon).
+ * 3. (Optional) In the function dropdown at top, select "setupSheet" and click "Run"
+ *    to instantly create and format all category tabs!
+ * 4. To activate real-time web sync, click the blue "Deploy" button (top right) > "New deployment":
+ *    - Type: "Web app"
  *    - Description: "TBM Applicant Sync"
  *    - Execute as: "Me"
  *    - Who has access: "Anyone"
- * 5. Click "Deploy", copy the Web App URL, and paste it into the TBM Dashboard Webhook field.
+ * 5. Click "Deploy", copy the Web App URL, and paste it into your TBM Dashboard.
  */
 
 const HEADERS = [
@@ -37,7 +41,42 @@ const HEADERS = [
   "Latest Note", "Last Updated (IST)"
 ];
 
-function getOrCreateSheet(ss, sheetName) {
+const CATEGORIES = [
+  "Creative Team",
+  "Influencer Relations",
+  "Brand Partnerships",
+  "Brand Solutions",
+  "Production",
+  "Post-Production",
+  "Talent Management",
+  "Human Resources",
+  "Finance"
+];
+
+/**
+ * Click "Run" on this function to automatically create and format
+ * the "career page data" tab and all category tabs with 1 click!
+ */
+function setupSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var master = getOrCreateSheet(ss, "career page data");
+
+  CATEGORIES.forEach(function(cat) {
+    getOrCreateSheet(ss, cat);
+  });
+
+  Logger.log("✅ Successfully initialized 'career page data' master tab and all category tabs!");
+}
+
+function getOrCreateSheet(a, b) {
+  var ss = (a && typeof a.getSheetByName === "function") ? a : 
+           (b && typeof b.getSheetByName === "function") ? b : 
+           SpreadsheetApp.getActiveSpreadsheet();
+
+  var sheetName = (typeof a === "string") ? a : 
+                  (typeof b === "string") ? b : 
+                  "career page data";
+
   var sheet = ss.getSheetByName(sheetName);
   if (!sheet && (sheetName === "career page data" || sheetName === "Master All Applicants")) {
     sheet = ss.getSheetByName("career page data") ||
