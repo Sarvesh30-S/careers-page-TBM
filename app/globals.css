@@ -3315,14 +3315,14 @@ td.empty {
   transition: transform 0.25s ease;
 }
 .gact .btn.primary:hover {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--on-accent);
   border-color: var(--accent);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 40%, transparent);
   transform: translateY(-2px) scale(1.02);
 }
 .gact .btn.primary:hover .arr {
-  color: var(--accent);
+  color: var(--on-accent);
   transform: translateX(4px);
 }
 .game .twq {
