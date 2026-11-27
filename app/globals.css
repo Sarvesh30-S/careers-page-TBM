@@ -1889,9 +1889,9 @@ mark.draw.active::after {
 }
 
 .drawer h4 {
-  font: 600 13.5px var(--sans);
+  font: 700 13.5px var(--sans);
   margin: 32px 0 10px;
-  color: var(--muted);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
