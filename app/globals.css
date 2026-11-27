@@ -3297,15 +3297,27 @@ td.empty {
   gap: 12px;
   flex-wrap: wrap;
 }
+.gact .btn.primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.2s, background 0.2s, color 0.2s;
+}
 .gact .btn.primary .arr {
   color: var(--accent);
+  margin-left: 6px;
+  display: inline-block;
   transition: transform 0.25s ease;
 }
 .gact .btn.primary:hover {
+  background: var(--ink);
+  color: var(--bg);
   border-color: var(--accent);
-  background: color-mix(in srgb, var(--ink) 95%, var(--accent) 5%);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+  transform: translateY(-2px) scale(1.02);
 }
 .gact .btn.primary:hover .arr {
+  color: var(--accent);
   transform: translateX(4px);
 }
 .game .twq {
