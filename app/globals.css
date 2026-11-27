@@ -2235,11 +2235,11 @@ footer h2 {
 }
 
 .footer-col-find {
-  grid-column: span 5;
+  grid-column: span 4;
 }
 
 .footer-col-follow {
-  grid-column: span 3;
+  grid-column: span 4;
 }
 
 footer a {

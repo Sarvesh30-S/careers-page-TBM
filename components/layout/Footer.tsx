@@ -90,12 +90,16 @@ export const Footer: React.FC<FooterProps> = ({ onTeamLogin }) => {
                 <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <address style={{ fontStyle: "normal", lineHeight: 1.55 }}>
-                TheBoredMonkey HQ, 2nd Floor, Todi building,
+              <address style={{ fontStyle: "normal", lineHeight: 1.6 }}>
+                TheBoredMonkey HQ
                 <br />
-                Mathuradas Mills Compound, Near Kerala Quarters,
+                2nd Floor, Todi Building
                 <br />
-                Lower Parel, Mumbai, Maharashtra 400013
+                Mathuradas Mills Compound
+                <br />
+                Near Kerala Quarters, Lower Parel
+                <br />
+                Mumbai, Maharashtra 400013
               </address>
             </div>
           </div>
