@@ -26,7 +26,7 @@
   /* Dimensions & Curves */
   --r: 14px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --max-width: 1200px;
+  --max-width: 100%;
 }
 
 /* Explicit Light Theme override */
@@ -110,7 +110,7 @@ p {
 .wrap {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 max(4vw, 16px);
+  padding: 0 clamp(16px, 2.5vw, 40px);
   width: 100%;
   box-sizing: border-box;
 }
