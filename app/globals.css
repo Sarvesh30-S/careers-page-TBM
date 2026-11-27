@@ -2303,18 +2303,6 @@ footer h2 {
   stroke: var(--accent);
 }
 
-.footer-badge {
-  font-size: 11px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: var(--soft);
-  color: var(--muted);
-  margin-left: 6px;
-  border: 1px solid var(--line);
-  letter-spacing: 0.02em;
-}
-
 .footer-address-block {
   display: flex;
   flex-direction: column;
