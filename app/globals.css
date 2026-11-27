@@ -3059,7 +3059,7 @@ td.empty {
 }
 
 :root[data-theme="dark"] .alioth-page-nav .a-client .a1:hover {
-  filter: none;
+  filter: drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.85));
   mix-blend-mode: normal;
   opacity: 1;
   background: transparent;
@@ -3075,7 +3075,7 @@ td.empty {
     opacity: 0.85;
   }
   :root:not([data-theme="light"]) .alioth-page-nav .a-client .a1:hover {
-    filter: none;
+    filter: drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.85));
     mix-blend-mode: normal;
     opacity: 1;
     background: transparent;
