@@ -3,21 +3,6 @@
 import React from "react";
 import { BRANDS } from "@/data/data";
 
-const BRIGHT_LOGOS = new Set([
-  "fashion",
-  "go paisa",
-  "Luvlap",
-  "meesho",
-  "Momamia",
-  "OZiva",
-  "R for Rabbit",
-  "rorosaur",
-  "Vilvah",
-  "streax",
-  "yogabar",
-  "Almond House",
-]);
-
 export default function BrandMarquee() {
   return (
     <section className="alioth-page-nav brands-section" aria-labelledby="brands-h">
@@ -31,9 +16,9 @@ export default function BrandMarquee() {
         <div className="js-marquee-wrapper">
           <div className="js-marquee">
             {BRANDS.map((b, idx) => {
-              const isDark = !BRIGHT_LOGOS.has(b.name);
+              const darkLogo = b.logo.replace("/images/brands/", "/images/brands/dark/");
               return (
-                <div key={`brand-${idx}`} className={`a-client ${isDark ? "dark-asset" : "light-asset"}`}>
+                <div key={`brand-${idx}`} className="a-client">
                   <a
                     href="#."
                     className="a1"
@@ -43,6 +28,15 @@ export default function BrandMarquee() {
                     <img
                       alt={b.name}
                       src={b.logo}
+                      className="brand-logo light-mode-logo"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <img
+                      alt={b.name}
+                      src={darkLogo}
+                      className="brand-logo dark-mode-logo"
+                      aria-hidden="true"
                       loading="lazy"
                       decoding="async"
                     />
@@ -54,9 +48,9 @@ export default function BrandMarquee() {
 
           <div className="js-marquee" aria-hidden="true">
             {BRANDS.map((b, idx) => {
-              const isDark = !BRIGHT_LOGOS.has(b.name);
+              const darkLogo = b.logo.replace("/images/brands/", "/images/brands/dark/");
               return (
-                <div key={`brand-dup-${idx}`} className={`a-client ${isDark ? "dark-asset" : "light-asset"}`}>
+                <div key={`brand-dup-${idx}`} className="a-client">
                   <a
                     href="#."
                     className="a1"
@@ -66,6 +60,15 @@ export default function BrandMarquee() {
                     <img
                       alt=""
                       src={b.logo}
+                      className="brand-logo light-mode-logo"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <img
+                      alt=""
+                      src={darkLogo}
+                      className="brand-logo dark-mode-logo"
+                      aria-hidden="true"
                       loading="lazy"
                       decoding="async"
                     />
