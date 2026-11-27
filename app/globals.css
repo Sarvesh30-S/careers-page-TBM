@@ -3047,9 +3047,9 @@ td.empty {
 }
 
 .alioth-page-nav .js-marquee-wrapper:hover .a-client .a1:hover {
-  filter: none drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
+  filter: none;
   opacity: 1;
-  transform: translateY(-5px) scale(1.15);
+  transform: translateY(-4px) scale(1.1);
 }
 
 .alioth-page-nav .a-client img {
@@ -3075,15 +3075,13 @@ td.empty {
 }
 
 :root[data-theme="dark"] .alioth-page-nav .js-marquee-wrapper:hover .a-client .a1:hover {
-  filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.95))
-          drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 50%, transparent))
-          brightness(1.15);
+  filter: none;
   mix-blend-mode: normal;
   opacity: 1;
   background: transparent;
   border-radius: 0;
   box-shadow: none;
-  transform: translateY(-5px) scale(1.15);
+  transform: translateY(-4px) scale(1.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -3096,15 +3094,13 @@ td.empty {
     opacity: 0.35;
   }
   :root:not([data-theme="light"]) .alioth-page-nav .js-marquee-wrapper:hover .a-client .a1:hover {
-    filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.95))
-            drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 50%, transparent))
-            brightness(1.15);
+    filter: none;
     mix-blend-mode: normal;
     opacity: 1;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
-    transform: translateY(-5px) scale(1.15);
+    transform: translateY(-4px) scale(1.1);
   }
 }
 
