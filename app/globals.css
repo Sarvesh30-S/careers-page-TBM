@@ -3003,6 +3003,10 @@ td.empty {
   animation: tbmMarquee 100s linear infinite;
 }
 
+.alioth-page-nav .js-marquee-wrapper:hover {
+  animation-play-state: paused;
+}
+
 .alioth-page-nav .js-marquee {
   display: flex;
   align-items: center;
