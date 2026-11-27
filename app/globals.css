@@ -3062,9 +3062,9 @@ td.empty {
   filter: none;
   mix-blend-mode: normal;
   opacity: 1;
-  background: #F6F3EE;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   transform: scale(1.06);
 }
 
@@ -3078,9 +3078,9 @@ td.empty {
     filter: none;
     mix-blend-mode: normal;
     opacity: 1;
-    background: #F6F3EE;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     transform: scale(1.06);
   }
 }
