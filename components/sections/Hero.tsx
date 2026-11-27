@@ -60,15 +60,15 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
       setIsTypingComplete(true);
 
       // Sequence:
-      // 1. Typing completes
-      // 2. Yellow line draws under "Courage"
-      // 3. After line completes drawing, reveal the rest of the page
+      // 1. Brief settle after typing completes (140ms)
+      // 2. Yellow line glides smoothly under "Courage"
+      // 3. Choreographed page reveal
       lineTimer = setTimeout(() => {
         setIsLineDrawn(true);
         readyTimer = setTimeout(() => {
           onTypingComplete?.();
-        }, 600);
-      }, 150);
+        }, 650);
+      }, 140);
     };
 
     // Allow user to click anywhere or press any key to skip typing
@@ -86,18 +86,17 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
     window.addEventListener("click", handleSkip, { once: true });
     window.addEventListener("keydown", handleSkip, { once: true });
 
-    // Step 1: Type "Curiosity gets you hired."
+    // Step 1: Type "Curiosity gets you hired." with smooth rhythmic pacing
     function stepLine1() {
       if (hasFinishedRef.current) return;
       if (l1 < LINE1.length) {
         l1++;
         setLine1(LINE1.slice(0, l1));
-        const delay = 30 + Math.floor(Math.random() * 8);
-        timer = setTimeout(stepLine1, delay);
+        timer = setTimeout(stepLine1, 42);
       } else {
         setIsLine1Done(true);
-        // Brief pause before line 2 starts
-        timer = setTimeout(stepLine2, 160);
+        // Natural breath pause after first sentence
+        timer = setTimeout(stepLine2, 240);
       }
     }
 
@@ -107,15 +106,14 @@ export default function Hero({ isReady = false, onTypingComplete }: HeroProps) {
       if (l2 < LINE2.length) {
         l2++;
         setLine2(LINE2.slice(0, l2));
-        const delay = 30 + Math.floor(Math.random() * 8);
-        timer = setTimeout(stepLine2, delay);
+        timer = setTimeout(stepLine2, 42);
       } else {
         finishTyping();
       }
     }
 
     // Small delay before starting typewriter
-    timer = setTimeout(stepLine1, 150);
+    timer = setTimeout(stepLine1, 160);
 
     return () => {
       clearTimeout(timer);
