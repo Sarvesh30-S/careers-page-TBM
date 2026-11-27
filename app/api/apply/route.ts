@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool, { query } from "@/lib/db";
+import { syncApplicantToGoogleSheets } from "@/lib/googleSheets";
 
 export async function POST(req: NextRequest) {
   try {
@@ -132,6 +133,46 @@ export async function POST(req: NextRequest) {
       );
 
       await client.query("COMMIT");
+
+      // Continuous real-time sync to Master Google Sheet and category tabs
+      syncApplicantToGoogleSheets({
+        ref,
+        applied_at: now.toISOString(),
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        city: data.city,
+        mumbai: data.mumbai || "Yes",
+        dept,
+        role_title: roleTitle,
+        stage: "New",
+        notice: data.notice || "30 days",
+        joining: data.joining || null,
+        buyout: data.buyout || "No",
+        total_exp: num(data.total),
+        rel_exp: num(data.rel),
+        ctc: num(data.ctc),
+        ectc: num(data.ectc),
+        negotiable: data.negotiable || null,
+        lastco: data.lastco || null,
+        lastdes: data.lastdes || null,
+        langs: Array.isArray(data.langs) ? data.langs.join(", ") : String(data.langs || ""),
+        resume_name: data.resume_name || null,
+        resume_url: data.resume_url || null,
+        portfolio: data.portfolio || null,
+        linkedin: data.linkedin || null,
+        instagram: data.instagram || null,
+        why: data.why || null,
+        admire: data.admire || null,
+        problem: data.problem || null,
+        source: data.source || "Website",
+        referral: data.referral || null,
+        craft: defaultScore.Craft,
+        thinking: defaultScore.Thinking,
+        culture: defaultScore.Culture,
+        speed: defaultScore.Speed,
+        notes: `Application received online for ${dept}.`,
+      }).catch((syncErr) => console.error("Async sheets sync error:", syncErr));
 
       return NextResponse.json({
         success: true,
