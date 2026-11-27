@@ -54,11 +54,33 @@ const CATEGORIES = [
 ];
 
 /**
+ * OPTIONAL: If this script was created directly in script.google.com rather than
+ * via Google Sheets > Extensions > Apps Script, paste your Sheet ID or full URL below:
+ */
+var SPREADSHEET_ID_OR_URL = ""; 
+
+function getActiveSpreadsheetSafely() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss && SPREADSHEET_ID_OR_URL) {
+    if (SPREADSHEET_ID_OR_URL.indexOf("http") === 0) {
+      ss = SpreadsheetApp.openByUrl(SPREADSHEET_ID_OR_URL);
+    } else {
+      ss = SpreadsheetApp.openById(SPREADSHEET_ID_OR_URL);
+    }
+  }
+  return ss;
+}
+
+/**
  * Click "Run" on this function to automatically create and format
  * the "career page data" tab and all category tabs with 1 click!
  */
 function setupSheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = getActiveSpreadsheetSafely();
+  if (!ss) {
+    Logger.log("⚠️ Could not find active spreadsheet. If using a standalone script, set SPREADSHEET_ID_OR_URL at top of Code.gs, OR open Google Sheets and click Extensions > Apps Script.");
+    return;
+  }
   var master = getOrCreateSheet(ss, "career page data");
 
   CATEGORIES.forEach(function(cat) {
@@ -71,11 +93,16 @@ function setupSheet() {
 function getOrCreateSheet(a, b) {
   var ss = (a && typeof a.getSheetByName === "function") ? a : 
            (b && typeof b.getSheetByName === "function") ? b : 
-           SpreadsheetApp.getActiveSpreadsheet();
+           getActiveSpreadsheetSafely();
 
   var sheetName = (typeof a === "string") ? a : 
                   (typeof b === "string") ? b : 
                   "career page data";
+
+  if (!ss) {
+    Logger.log("⚠️ No spreadsheet found. Open your sheet -> Extensions -> Apps Script.");
+    return null;
+  }
 
   var sheet = ss.getSheetByName(sheetName);
   if (!sheet && (sheetName === "career page data" || sheetName === "Master All Applicants")) {
@@ -140,7 +167,7 @@ function applicantToRow(app) {
 function doPost(e) {
   try {
     var contents = JSON.parse(e.postData.contents);
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = getActiveSpreadsheetSafely();
     var master = getOrCreateSheet(ss, "career page data");
 
     if (contents.action === "new_applicant" && contents.applicant) {
