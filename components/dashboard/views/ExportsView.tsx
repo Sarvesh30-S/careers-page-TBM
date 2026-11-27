@@ -39,8 +39,16 @@ const HEADERS = [
 
 function getOrCreateSheet(ss, sheetName) {
   var sheet = ss.getSheetByName(sheetName);
+  if (!sheet && (sheetName === "career page data" || sheetName === "Master All Applicants")) {
+    sheet = ss.getSheetByName("career page data") ||
+            ss.getSheetByName("Career Page Data") ||
+            ss.getSheetByName("Master") ||
+            ss.getSheets()[0];
+  }
   if (!sheet) {
     sheet = ss.insertSheet(sheetName);
+  }
+  if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold").setBackground("#F4F4F6");
     sheet.setFrozenRows(1);
@@ -94,7 +102,7 @@ function doPost(e) {
   try {
     var contents = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var master = getOrCreateSheet(ss, "Master All Applicants");
+    var master = getOrCreateSheet(ss, "career page data");
 
     if (contents.action === "new_applicant" && contents.applicant) {
       var row = applicantToRow(contents.applicant);
@@ -288,7 +296,7 @@ export const ExportsView: React.FC<ExportsViewProps> = ({
               </button>
             </div>
             <p className="note">
-              Create a tab named <strong>Master</strong> in your Google Sheet, click cell <strong>A1</strong>, and paste this formula.
+              In your Google Sheet tab named <strong>career page data</strong>, click cell <strong>A1</strong> and paste this formula.
             </p>
 
             <h2 style={{ marginTop: "32px" }}>Category Tabs (Filtered Views)</h2>
@@ -309,7 +317,7 @@ export const ExportsView: React.FC<ExportsViewProps> = ({
                 <tbody>
                   {DEPTS.map((dept) => {
                     const encoded = encodeURIComponent(dept);
-                    const masterFilter = `=QUERY('Master'!A:AK, "SELECT * WHERE Col8 = '${dept}'", 1)`;
+                    const masterFilter = `=QUERY('career page data'!A:AK, "SELECT * WHERE Col8 = '${dept}'", 1)`;
                     const directUrl = `=IMPORTDATA("${origin}/api/sync/sheets?dept=${encoded}")`;
                     return (
                       <tr key={dept} style={{ borderBottom: "1px solid var(--border)" }}>
